@@ -17,7 +17,7 @@ export const bodyContainer = css`
 `;
 
 export const height = css`
-	height: calc(100% - 500px);
+	height: calc(100% - 430px);
 `;
 
 export const flexCenter = css`
