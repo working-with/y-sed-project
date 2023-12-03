@@ -1,13 +1,23 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { BottomProps } from '.';
 import { flexAlignCenter, flexCenter } from '../../../style/common';
 
 export const Body = styled.div<BottomProps>`
-	height: 500px;
+	height: 430px;
 	${flexAlignCenter}
 	gap: 100px;
-	justify-content: ${({ button }) => (button ? 'space-between' : '')};
+	${({ top }) =>
+		top &&
+		css`
+			justify-content: center;
+		`}
+
+	${({ button }) =>
+		button &&
+		css`
+			justify-content: space-between;
+		`}
 
 	padding: 45px 79px;
 	background-color: ${({ theme }) => theme.PALETTE.blue[100]};
@@ -38,6 +48,7 @@ export const Div = styled.div`
 export const Content = styled.div`
 	${flexCenter}
 	text-align: center;
+	width: 1400px;
 
 	> pre {
 		font-size: 80px;
