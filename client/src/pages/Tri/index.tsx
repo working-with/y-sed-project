@@ -1,5 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+
+import { userInfoAtom } from '../../recoil/atoms/user.atom';
+import getName from '../../utils/getName';
 
 import * as S from './index.styled';
 
@@ -17,6 +21,9 @@ function Tri() {
 		}, 10000);
 	}, []);
 
+	const userInfo = useRecoilValue(userInfoAtom);
+	const { name } = getName(userInfo.name);
+
 	return (
 		<S.Body>
 			<S.ImgBox>
@@ -25,7 +32,7 @@ function Tri() {
 			</S.ImgBox>
 
 			<Bottom>
-				내가 [아동 이름]이나 다른 아이들에게
+				내가 {name}이나 다른 아이들에게
 				<br />
 				일어날 수 있는 몇 가지 이야기를
 				<br />

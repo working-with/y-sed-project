@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+
+import { userInfoAtom } from '../../recoil/atoms/user.atom';
+import getName from '../../utils/getName';
 
 import * as S from './index.styled';
 
@@ -15,11 +19,14 @@ function Start() {
 		setClick(true);
 	};
 
+	const userInfo = useRecoilValue(userInfoAtom);
+	const { name } = getName(userInfo.name);
+
 	return (
 		<S.Body>
 			<S.TitleBox>
 				{!click && <img src="/assets/img/icon/smileIcon.svg" />}
-				{click && <span>안녕 [아동 이름]~!</span>}
+				{click && <span>안녕 {name}~!</span>}
 			</S.TitleBox>
 
 			<S.ButtonBox>
