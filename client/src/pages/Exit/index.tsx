@@ -1,7 +1,18 @@
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/common/Button';
 import * as S from './index.styled';
 
 function Exit() {
+	const navigate = useNavigate();
+
+	const handleCloseClick = () => {
+		navigate('/');
+	};
+
+	const handleCancelClick = () => {
+		navigate(-1);
+	};
+
 	return (
 		<S.Body>
 			<div>
@@ -9,8 +20,12 @@ function Exit() {
 			</div>
 
 			<S.ButtonBox>
-				<Button shape="red">예</Button>
-				<Button shape="blue">아니요</Button>
+				<Button shape="red" onClick={handleCloseClick}>
+					예
+				</Button>
+				<Button shape="blue" onClick={handleCancelClick}>
+					아니요
+				</Button>
 			</S.ButtonBox>
 		</S.Body>
 	);
