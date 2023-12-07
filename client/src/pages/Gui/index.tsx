@@ -1,52 +1,58 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from "react";
 
-import * as S from './index.styled';
+import * as S from "./index.styled";
 
-import Bottom from '../../components/common/Bottom';
-import IconBox from '../../components/common/IconBox';
+import Gui01 from "../../components/pages/Gui/Gui01";
+import Shp04 from "../../components/pages/Gui/Shp04";
+import Shp05 from "../../components/pages/Gui/Shp05";
+import Shp06 from "../../components/pages/Gui/Shp06";
+import Shp07 from "../../components/pages/Gui/Shp07";
 
 function Gui() {
-	const [ment, setMent] = useState<boolean>(false);
-	const [background, setBackground] = useState(false);
+  const [useEffectValue, setUseEffectValue] = useState<number>(1);
+  const intervalIdRef = useRef<number | null>(null);
 
-	useEffect(() => {
-		setTimeout(() => {
-			setMent(true);
-		}, 10000);
+  const components = useMemo(() => {
+    switch (useEffectValue) {
+      case 1:
+        return <Gui01 />;
+      case 2:
+        return <Shp04 />;
+      case 3:
+        return <Shp05 />;
+      case 4:
+        return <Shp06 />;
+      case 5:
+        return <Shp07 />;
+      default:
+        return <Gui01 />;
+    }
+  }, [useEffectValue]);
 
-		setBackground(true);
-	}, []);
+  useEffect(() => {
+    // intervalIdRef.current에 현재 동작 중인 interval을 저장
+    intervalIdRef.current = window.setInterval(() => {
+      setUseEffectValue(prevValue => (prevValue % 5) + 1);
+    }, 10000);
 
-	return (
-		<S.Body>
-			<S.Content>
-				{background && (
-					<>
-						<S.Image src="/assets/img/icon/click.svg" />
-						<S.Div>
-							<div>
-								<img src="/assets/img/icon/blueO.svg" />
-								<img src="/assets/img/icon/redX.svg" />
-							</div>
-						</S.Div>
-					</>
-				)}
+    // 컴포넌트가 언마운트될 때 interval을 정리합니다.
+    return () => {
+      // 현재 동작 중인 interval을 clearInterval
+      if (intervalIdRef.current !== null) {
+        window.clearInterval(intervalIdRef.current);
+      }
+    };
+  }, []);
 
-				<S.ImageBox>
-					<IconBox iconName="smileIcon" />
-					<IconBox iconName="angryIcon" />
-					<IconBox iconName="sadIcon" />
-					<IconBox iconName="happyIcon" />
-				</S.ImageBox>
-			</S.Content>
+  useEffect(() => {
+    console.log(useEffectValue);
+    // useEffectValue가 11일 때, 현재 동작 중인 interval을 clearInterval
+    if (useEffectValue === 5 && intervalIdRef.current !== null) {
+      window.clearInterval(intervalIdRef.current);
+    }
+  }, [useEffectValue]);
 
-			<Bottom>
-				{!ment &&
-					'각 이야기 마다, [아동 이름]이가\n느낄 수 있는 다양한 마음이 있어.'}
-				{ment && '이야기가 끝난 후에는 내가\n이 마음에 대해 물어볼건데,'}
-			</Bottom>
-		</S.Body>
-	);
+  return <S.Body>{components}</S.Body>;
 }
 
 export default Gui;
