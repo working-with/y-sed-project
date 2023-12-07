@@ -33,7 +33,7 @@ function Gui() {
     // intervalIdRef.current에 현재 동작 중인 interval을 저장
     intervalIdRef.current = window.setInterval(() => {
       setUseEffectValue(prevValue => (prevValue % 5) + 1);
-    }, 10000);
+    }, 50000);
 
     // 컴포넌트가 언마운트될 때 interval을 정리합니다.
     return () => {
