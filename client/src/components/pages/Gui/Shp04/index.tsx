@@ -1,36 +1,94 @@
-import * as S from './index.styled';
+import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
 
-import Bottom from '../../../common/Bottom';
-import Graph from '../../../common/Graph';
+import { userInfoAtom } from "../../../../recoil/atoms/user.atom";
+import getName from "../../../../utils/getName";
+
+import * as S from "./index.styled";
+
+import Bottom from "../../../common/Bottom";
+import Graph from "../../../common/Graph";
 
 // gui04 ~ guiShp04
-function Gui04() {
-	return (
-		<S.Body>
-			<S.Content>
-				<S.Image src="/assets/img/icon/click.svg" />
-				<Graph />
-			</S.Content>
+function Shp04() {
+  const userInfo = useRecoilValue(userInfoAtom);
+  const { name } = getName(userInfo.name);
 
-			<Bottom>
-				그리고 얼만큼 [아동이름]이와
-				<br />
-				같은지 알려줄래?
-			</Bottom>
-		</S.Body>
-	);
+  const [click, setClick] = useState(false);
+
+  const [first, setFirst] = useState(true);
+  const [second, setSecond] = useState(false);
+  const [third, setThird] = useState(false);
+  const [fourth, setFourth] = useState(false);
+
+  const delay = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
+
+  useEffect(() => {
+    let timeoutId1: NodeJS.Timeout;
+    let timeoutId2: NodeJS.Timeout;
+    let timeoutId3: NodeJS.Timeout;
+    let timeoutId4: NodeJS.Timeout;
+
+    const runAnimation = async () => {
+      timeoutId1 = setTimeout(() => {
+        setClick(true);
+        setFirst(true);
+
+        timeoutId2 = setTimeout(() => {
+          setFirst(false);
+          setSecond(true);
+
+          timeoutId3 = setTimeout(() => {
+            setSecond(false);
+            setThird(true);
+
+            timeoutId4 = setTimeout(() => {
+              setThird(false);
+              setFourth(true);
+            }, 10000);
+          }, 10000);
+        }, 10000);
+      }, 10000);
+    };
+
+    runAnimation();
+
+    // Cleanup 함수를 반환하여 컴포넌트가 언마운트되면 실행될 수 있도록 합니다.
+    return () => {
+      // 모든 타이머를 클리어합니다.
+      clearTimeout(timeoutId1);
+      clearTimeout(timeoutId2);
+      clearTimeout(timeoutId3);
+      clearTimeout(timeoutId4);
+    };
+  }, []);
+
+  return (
+    <S.Body>
+      <S.Content>
+        {click && (
+          <S.Image
+            src="/assets/img/icon/click.svg"
+            click={click}
+            first={first}
+            second={second}
+            third={third}
+            fourth={fourth}
+          />
+        )}
+        <Graph />
+      </S.Content>
+
+      <Bottom>
+        {!click && `그리고 얼만큼 ${name}이와\n같은지 알려줄래?`}
+
+        {click && first && "가장 작은 네모는 너의 마음과\n아주 조금 비슷하다는 걸 말해."}
+        {second && "그다음 네모는 너의 마음과\n약간 비슷하다는 거야."}
+        {third && "그 다음 네모는 너의 마음과\n꽤 많이 비슷하다는 뜻이고,"}
+        {fourth && "마지막 가장 큰 네모는 너의 마음과\n아주 많이 비슷하다는거야!"}
+      </Bottom>
+    </S.Body>
+  );
 }
 
-export default Gui04;
-
-// 가장 작은 네모는 너의 마음과
-// 아주 조금 비슷하다는 걸 말해.
-
-// 그다음 네모는 너의 마음과
-// 약간 비슷하다는 거야.
-
-// 그 다음 네모는 너의 마음과
-// 꽤 많이 비슷하다는 뜻이고,
-
-// 마지막 가장 큰 네모는 너의 마음과
-// 아주 많이 비슷하다는거야!
+export default Shp04;
