@@ -8,7 +8,7 @@ import Qox from '../../components/common/Qox';
 import Bottom from '../../components/common/Bottom';
 
 function Quiz01() {
-	const [quiz, setQuiz] = useState<boolean>(true);
+	const [quiz, setQuiz] = useState<boolean>(false);
 
 	return (
 		<S.Body>
