@@ -1,17 +1,17 @@
-import styled from 'styled-components';
-import { bodyContainer, flexCenter, height } from '../../style/common';
+import styled from "styled-components";
+import { bodyContainer, flexCenter, height } from "../../style/common";
 
 export const Body = styled.div`
-	${bodyContainer}
+  ${bodyContainer}
 `;
 
 export const ImgBox = styled.div`
-	${height}
-	${flexCenter}
+  ${height}
+  ${flexCenter}
 	gap: 82px;
 
-	> img {
-		width: 910px;
-		height: 569px;
-	}
+  > img {
+    width: 910px;
+    height: 569px;
+  }
 `;

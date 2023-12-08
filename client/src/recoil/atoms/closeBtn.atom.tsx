@@ -1,7 +1,7 @@
-import { atom } from 'recoil';
+import { atom } from "recoil";
 
 // closeBtn state
 export const includeCloseState = atom({
-	key: 'includeCloseState',
-	default: true,
+  key: "includeCloseState",
+  default: true,
 });
