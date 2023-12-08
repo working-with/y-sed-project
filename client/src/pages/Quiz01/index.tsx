@@ -1,27 +1,27 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import * as S from './index.styled';
+import * as S from "./index.styled";
 
-import QUIZ_01 from '../../constants/quiz01';
+import QUIZ_01 from "../../constants/quiz01";
 
-import Qox from '../../components/common/Qox';
-import Bottom from '../../components/common/Bottom';
+import Qox from "../../components/common/Qox";
+import Bottom from "../../components/common/Bottom";
 
 function Quiz01() {
-	const [quiz, setQuiz] = useState<boolean>(false);
+  const [quiz, setQuiz] = useState<boolean>(false);
 
-	return (
-		<S.Body>
-			<S.Content>
-				{quiz && <Qox />}
+  return (
+    <S.Body>
+      <S.Content>
+        {quiz && <Qox />}
 
-				<img src="/assets/img/icon/0.svg" />
-				<img src="/assets/img/storyImg/1/1-G1.svg" />
-			</S.Content>
+        <img src="/assets/img/icon/0.svg" />
+        <img src="/assets/img/storyImg/1/1-G1.svg" />
+      </S.Content>
 
-			<Bottom top={quiz ? false : true}>{QUIZ_01.NAR1}</Bottom>
-		</S.Body>
-	);
+      <Bottom top={quiz ? false : true}>{QUIZ_01.NAR1}</Bottom>
+    </S.Body>
+  );
 }
 
 export default Quiz01;

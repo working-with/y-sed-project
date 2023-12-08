@@ -34,6 +34,7 @@ export const Div = styled.div`
 
   border-radius: 16px;
   border: 7px solid ${({ theme }) => theme.PALETTE.black};
+  background-color: ${({ theme }) => theme.PALETTE.white};
 
   ${flexCenter}
 
