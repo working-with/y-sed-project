@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 
-import { userInfoAtom } from "../../../../recoil/atoms/user.atom";
-import getName from "../../../../utils/getName";
+import { userInfoAtom } from "../../../recoil/atoms/user.atom";
+import getName from "../../../utils/getName";
 
 import * as S from "./index.styled";
 
-import Bottom from "../../../common/Bottom";
-import Graph from "../../../common/Graph";
+import Bottom from "../../../components/common/Bottom";
+import Graph from "../../../components/common/Graph";
 
 // gui04 ~ guiShp04
 function Shp04() {
   const userInfo = useRecoilValue(userInfoAtom);
-  const { name } = getName(userInfo.name);
+  const name = getName(userInfo.name);
 
   const [click, setClick] = useState(false);
 
@@ -80,7 +80,7 @@ function Shp04() {
       </S.Content>
 
       <Bottom>
-        {!click && `그리고 얼만큼 ${name}이와\n같은지 알려줄래?`}
+        {!click && `그리고 얼만큼 ${name}와\n같은지 알려줄래?`}
 
         {click && first && "가장 작은 네모는 너의 마음과\n아주 조금 비슷하다는 걸 말해."}
         {second && "그다음 네모는 너의 마음과\n약간 비슷하다는 거야."}

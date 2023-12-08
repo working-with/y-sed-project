@@ -1,19 +1,19 @@
-import styled from 'styled-components';
-import { bodyContainer, flexCenter, height } from '../../style/common';
+import styled from "styled-components";
+import { bodyContainer, flexCenter, height } from "../../style/common";
 
 export const Body = styled.div`
-	${bodyContainer}
+  ${bodyContainer}
 `;
 
 export const Content = styled.div`
-	${height}
+  ${height}
 `;
 
 export const Top = styled.div`
-	${flexCenter}
-	padding: 92px 0 392px 0;
+  ${flexCenter}
+  padding: 92px 0 392px 0;
 `;
 
 export const Middle = styled.div`
-	${flexCenter}
+  ${flexCenter}
 `;

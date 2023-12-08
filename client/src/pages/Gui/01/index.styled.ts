@@ -1,5 +1,9 @@
 import styled from "styled-components";
-import { flexCenter, height } from "../../../../style/common";
+import { bodyContainer, flexCenter, height } from "../../../style/common";
+
+export const Body = styled.div`
+  ${bodyContainer}
+`;
 
 export const Content = styled.div`
   ${height}
@@ -21,6 +25,7 @@ export const Div = styled.div`
   width: 1389px;
   height: 878px;
   margin: 0 auto;
+  transform: translate(0, -8px);
 
   > div {
     position: fixed;

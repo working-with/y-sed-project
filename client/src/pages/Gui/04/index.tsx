@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 import * as S from "./index.styled";
 
-import Bottom from "../../../common/Bottom";
-import Shp10 from "../Shp10";
+import Bottom from "../../../components/common/Bottom";
+import Shp07 from "../../../components/pages/Gui/Shp07";
 
 interface Shp06Props {
   sad?: boolean;
@@ -20,11 +20,9 @@ function Shp06({ sad }: Shp06Props) {
 
   useEffect(() => {
     setTimeout(() => {
-      if (sad) {
-        setChange(true);
-      }
+      setChange(true);
     }, 10000);
-  }, [change]);
+  }, []);
 
   return (
     <S.Body>
@@ -38,7 +36,7 @@ function Shp06({ sad }: Shp06Props) {
         </>
       )}
 
-      {change && <Shp10 />}
+      {change && <Shp07 />}
     </S.Body>
   );
 }

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { bodyContainer, flexCenter, height } from "../../../../style/common";
+import { bodyContainer, flexCenter, height } from "../../../style/common";
 
 interface ImageProps {
   click: boolean;

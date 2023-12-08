@@ -1,7 +1,7 @@
 import * as S from "./index.styled";
 
-import Bottom from "../../../common/Bottom";
-import Button from "../../../common/Button";
+import Bottom from "../../../components/common/Bottom";
+import Button from "../../../components/common/Button";
 import { useNavigate } from "react-router-dom";
 
 function ShpFin() {
@@ -12,7 +12,7 @@ function ShpFin() {
   };
 
   return (
-    <>
+    <S.Body>
       <S.Content>
         <Button variant="green" onClick={handleStartClick}>
           시작하기
@@ -24,7 +24,7 @@ function ShpFin() {
         <br />
         우리 이제 시작해볼까?
       </Bottom>
-    </>
+    </S.Body>
   );
 }
 
