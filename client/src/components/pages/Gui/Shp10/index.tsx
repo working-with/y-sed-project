@@ -8,12 +8,12 @@ import * as S from "./index.styled";
 
 import Graph from "../../../common/Graph";
 import Bottom from "../../../common/Bottom";
-import ShpFin from "../ShpFin";
+import ShpFin from "../../../../pages/Gui/Fin";
 
 // shp10 - 11
 function Shp10() {
   const userInfo = useRecoilValue(userInfoAtom);
-  const { name } = getName(userInfo.name);
+  const name = getName(userInfo.name);
 
   const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(null);
   const [btnClick, setBtnClick] = useState<boolean>(false);
@@ -34,9 +34,7 @@ function Shp10() {
             <Graph onGraphItemClick={handleGraphItemClick} />
           </S.Content>
           <Bottom button={true} color={selectedItemIndex !== null ? "bluePlay" : ""} onClick={handleBlueBtnClick}>
-            {selectedItemIndex !== null
-              ? `와! 좋았어.\n다음으로 가볼까?`
-              : `그리고 얼만큼 ${name}이와\n같은지 알려줄래?`}
+            {selectedItemIndex !== null ? `와! 좋았어.\n다음으로 가볼까?` : `그리고 얼만큼 ${name}와\n같은지 알려줄래?`}
           </Bottom>
         </>
       )}

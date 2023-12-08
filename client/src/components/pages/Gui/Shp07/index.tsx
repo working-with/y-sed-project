@@ -8,12 +8,12 @@ import * as S from "./index.styled";
 
 import Graph from "../../../common/Graph";
 import Bottom from "../../../common/Bottom";
-import Shp06 from "../Shp06";
+import Shp06 from "../../../../pages/Gui/04";
 
 // shp07 - 08
 function Shp07() {
   const userInfo = useRecoilValue(userInfoAtom);
-  const { name } = getName(userInfo.name);
+  const name = getName(userInfo.name);
 
   const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(null);
   const [btnClick, setBtnClick] = useState<boolean>(false);
