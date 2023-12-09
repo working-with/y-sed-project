@@ -10,9 +10,11 @@ export const Body = styled.div`
 export const GraphItem = styled.div<GraphProps>`
   border-radius: 24px;
   cursor: pointer;
+
   &:hover {
     background: ${({ theme }) => theme.PALETTE.orange[400]};
   }
+
   ${({ clicked }) =>
     clicked
       ? css`
