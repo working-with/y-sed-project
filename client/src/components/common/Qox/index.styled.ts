@@ -16,4 +16,8 @@ export const Body = styled.div`
     gap: 137px;
     transform: translate(25%, 50%);
   }
+
+  & img:hover {
+    transform: scale(1.1);
+  }
 `;
