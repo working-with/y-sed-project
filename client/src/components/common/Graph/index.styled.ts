@@ -1,36 +1,46 @@
-import styled from 'styled-components';
+import styled, { css } from "styled-components";
+import { GraphProps } from ".";
 
 export const Body = styled.div`
-	display: flex;
-	align-items: flex-end;
-	gap: 35px;
-
-	> div {
-		border-radius: 24px;
-		/* background: ${({ theme }) => theme.PALETTE.gray}; */
-	}
+  display: flex;
+  align-items: flex-end;
+  gap: 35px;
 `;
 
-export const First = styled.div`
-	width: 250px;
-	height: 250px;
-	background: ${({ theme }) => theme.PALETTE.gray};
+export const GraphItem = styled.div<GraphProps>`
+  border-radius: 24px;
+  cursor: pointer;
+
+  &:hover {
+    background: ${({ theme }) => theme.PALETTE.orange[400]};
+  }
+
+  ${({ clicked }) =>
+    clicked
+      ? css`
+          background: ${({ theme }) => theme.PALETTE.orange[400]};
+        `
+      : css`
+          background: ${({ theme }) => theme.PALETTE.gray};
+        `}
 `;
 
-export const Second = styled.div`
-	width: 325px;
-	height: 325px;
-	background: ${({ theme }) => theme.PALETTE.orange[400]};
+export const First = styled(GraphItem)`
+  width: 250px;
+  height: 250px;
 `;
 
-export const Third = styled.div`
-	width: 426px;
-	height: 425px;
-	background: ${({ theme }) => theme.PALETTE.gray};
+export const Second = styled(GraphItem)`
+  width: 325px;
+  height: 325px;
 `;
 
-export const Fourth = styled.div`
-	width: 550px;
-	height: 550px;
-	background: ${({ theme }) => theme.PALETTE.gray};
+export const Third = styled(GraphItem)`
+  width: 426px;
+  height: 425px;
+`;
+
+export const Fourth = styled(GraphItem)`
+  width: 550px;
+  height: 550px;
 `;
