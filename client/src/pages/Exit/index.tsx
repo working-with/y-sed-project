@@ -1,12 +1,25 @@
+import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
-import Button from "../../components/common/Button";
+
+import { userInfoAtom } from "../../recoil/atoms/user.atom";
+
 import * as S from "./index.styled";
+
+import Button from "../../components/common/Button";
 
 function Exit() {
   const navigate = useNavigate();
 
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+
   const handleCloseClick = () => {
     navigate("/");
+
+    setUserInfo({
+      name: "",
+      gender: "",
+      code: "",
+    });
   };
 
   const handleCancelClick = () => {
