@@ -1,12 +1,12 @@
 export interface KidInformation {
-	id: number;
-	code: string;
-	name: string;
-	gender: Gender;
-	experiment: string[];
+  id: number;
+  code: string;
+  name: string;
+  gender: Gender;
+  experiment: string[];
 }
 
 enum Gender {
-	'F' = 0,
-	'M' = 1,
+  "F" = 0,
+  "M" = 1,
 }

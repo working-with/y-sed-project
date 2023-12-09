@@ -1,15 +1,15 @@
 export interface Experiment {
-	id: number;
-	code: string;
-	image: string[];
-	answerType: string;
-	booleanAnswer?: BooleanAnswer;
-	scaleAnswer?: number;
+  id: number;
+  code: string;
+  image: string[];
+  answerType: string;
+  booleanAnswer?: BooleanAnswer;
+  scaleAnswer?: number;
 }
 
 enum BooleanAnswer {
-	'O' = 0,
-	'X' = 1,
+  "O" = 0,
+  "X" = 1,
 }
 
 // interface Experiment {
