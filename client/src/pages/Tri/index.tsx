@@ -17,7 +17,7 @@ function Tri() {
 
   useEffect(() => {
     setTimeout(() => {
-      navigate("/gui/1");
+      navigate("/example/1");
     }, 20000);
   }, []);
 
@@ -27,8 +27,8 @@ function Tri() {
   return (
     <S.Body>
       <S.ImgBox>
-        <img src="/assets/img/storyImg/1/1-G1.svg" />
-        <img src="/assets/img/storyImg/7/7-G1.svg" />
+        <img src={`/assets/img/storyImg/1/1-${userInfo.gender === "여자" ? "G1" : "B1"}.svg`} />
+        <img src={`/assets/img/storyImg/7/7-${userInfo.gender === "여자" ? "G1" : "B1"}.svg`} />
       </S.ImgBox>
 
       <Bottom>
