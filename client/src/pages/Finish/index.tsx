@@ -1,10 +1,21 @@
 import { useState } from "react";
-import Bottom from "../../components/common/Bottom";
-import COMMON from "../../constants/common";
+import { useRecoilValue } from "recoil";
+
+import { userInfoAtom } from "../../recoil/atoms/user.atom";
+import getName from "../../utils/getName";
+import common from "../../utils/common";
+
 import * as S from "./index.styled";
+
+import Bottom from "../../components/common/Bottom";
 
 function Finish() {
   const [finish, setFinish] = useState(true);
+
+  const userInfo = useRecoilValue(userInfoAtom);
+  const name = getName(userInfo.name);
+
+  const { FIN1, FIN2 } = common(name);
 
   return (
     <S.Body>
@@ -19,7 +30,7 @@ function Finish() {
         )}
       </S.Content>
 
-      <Bottom top={true}>{finish ? COMMON.FIN1 : COMMON.FIN2}</Bottom>
+      <Bottom top={true}>{finish ? FIN1 : FIN2}</Bottom>
     </S.Body>
   );
 }
