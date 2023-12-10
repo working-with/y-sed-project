@@ -3,7 +3,7 @@ import MESSAGE from "../constants/message";
 interface checkInputProps {
   name: string;
   code: string;
-  gender: string;
+  gender: number;
 }
 
 const validateInput = (value: checkInputProps) => {
@@ -17,7 +17,7 @@ const validateInput = (value: checkInputProps) => {
       message: MESSAGE.CHECK.CODE,
     },
     {
-      checked: !value.gender || value.gender.length === 0,
+      checked: value.gender !== 0 && value.gender !== 1,
       message: MESSAGE.CHECK.GENDER,
     },
   ];
