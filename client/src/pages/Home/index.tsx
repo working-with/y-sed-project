@@ -11,6 +11,8 @@ import MESSAGE from "../../constants/message";
 import * as S from "./index.styled";
 
 import Button from "../../components/common/Button";
+import { useEffect } from "react";
+import STATUS_CODE from "../../constants/statusCode";
 
 function Home() {
   useCloseBtn();
@@ -22,11 +24,17 @@ function Home() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
+    // 여자: 0 / 남자: 1
     setUserInfo((prev: any) => ({
       ...prev,
       [name]: value,
+      gender: value === "여자" ? 0 : 1,
     }));
   };
+
+  useEffect(() => {
+    console.log(userInfo);
+  }, [userInfo]);
 
   const handleStartClick = async () => {
     const fail = validateInput(userInfo).filter(info => info.checked);
@@ -35,21 +43,17 @@ function Home() {
       const errorMessage = fail[0].message;
       alert(errorMessage);
     } else {
-      // const response = await axiosRequest.requestAxios<ResData<KidInformation>>(
-      // 	'post',
-      // 	'/v1/kid',
-      // );
-      // const data = response.data;
-      // console.log(data);
-      navigate("/start");
+      const response = await axiosRequest.requestAxios<ResData<KidInformation>>("post", "/v1/kid", userInfo);
+
+      if (response.status === STATUS_CODE.CREATED) {
+        navigate("/start");
+      }
     }
   };
 
   const handleExcelDownClick = async () => {
     if (window.confirm(MESSAGE.EXCEL_DOWN)) {
-      const response = await axiosRequest.requestAxios<ResData<KidInformation[]>>("get", "/v1/kid");
-
-      const data = response.data;
+      // const response = await axiosRequest.requestAxios<ResData<KidInformation[]>>("get", "/v1/kid");
     }
   };
 
