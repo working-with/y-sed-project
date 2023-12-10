@@ -11,7 +11,7 @@ export const Content = styled.div`
 
 export const Top = styled.div`
   ${flexCenter}
-  padding: 92px 0 392px 0;
+  padding: 72px 0 392px 0;
 `;
 
 export const Middle = styled.div`

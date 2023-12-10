@@ -8,4 +8,10 @@ export const Body = styled.div`
 export const Content = styled.div`
   ${height}
   ${flexCenter}
+  flex-direction: column;
+  gap: 300px;
+`;
+
+export const Status = styled.div`
+  margin-bottom: 68px;
 `;
