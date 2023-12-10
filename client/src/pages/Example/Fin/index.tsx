@@ -9,7 +9,7 @@ function ExFin() {
   const navigate = useNavigate();
 
   const handleStartClick = () => {
-    navigate("/begin");
+    navigate("/quiz/1/begin/0");
   };
 
   return (
