@@ -1,13 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { CommonResponse } from './common.dto';
-import { Kid } from '../schema/kid.schema';
+import { KidDto } from './kid.dto';
 
 export class getKidsResponse extends CommonResponse {
   @ApiProperty()
-  data?: Partial<Array<Kid>>;
+  data?: Partial<Array<KidDto>>;
 }
 
 export class getKidResponse extends CommonResponse {
   @ApiProperty()
-  data?: Partial<Kid>;
+  data?: Partial<KidDto>;
 }
