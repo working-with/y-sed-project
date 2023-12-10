@@ -1,20 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import {
-  addDoc,
-  collection,
-  doc,
-  getDocs,
-  orderBy,
-  query,
-  updateDoc,
-  where,
-} from 'firebase/firestore';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { FirebaseService } from 'src/firebase/firebase.service';
 import { LogService } from 'src/util/logger';
 import { CreateKidDto, CreateKidResponseDto } from './dto/create.dto';
 import { getKidResponse, getKidsResponse } from './dto/get.dto';
-import { UpdateKidDto } from './dto/update.dto';
-import { CommonResponse } from './dto/common.dto';
 
 @Injectable()
 export class KidService {
