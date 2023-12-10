@@ -6,10 +6,13 @@ export enum Gender {
   M = 1,
 }
 
-export class CreateKidDto {
+export class Kid {
   @ApiProperty()
-  @IsNotEmpty()
+  id: string;
+
+  @ApiProperty()
   @IsString()
+  @IsNotEmpty()
   code: string;
 
   @ApiProperty()
@@ -20,5 +23,11 @@ export class CreateKidDto {
   @ApiProperty()
   @IsEnum(Gender)
   @IsNotEmpty()
-  gender: Gender; // F:0, M:1
+  gender: Gender;
+
+  //   @ApiProperty()
+  //   experiment: Array<Experiment>;
+
+  //   @ApiProperty()
+  //   answer: Array<Answer>;
 }
