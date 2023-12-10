@@ -1,8 +1,20 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  orderBy,
+  query,
+  updateDoc,
+  where,
+} from 'firebase/firestore';
 import { FirebaseService } from 'src/firebase/firebase.service';
 import { LogService } from 'src/util/logger';
-import { CreateKidDto } from './dto/create-kid.dto';
+import { CreateKidDto, CreateKidResponseDto } from './dto/create.dto';
+import { getKidResponse, getKidsResponse } from './dto/get.dto';
+import { UpdateKidDto } from './dto/update.dto';
+import { CommonResponse } from './dto/common.dto';
 
 @Injectable()
 export class KidService {
@@ -15,10 +27,17 @@ export class KidService {
     this.firestore = firebaseService.getFirestoreInstance();
   }
 
-  async getKids() {
+  async getKids(): Promise<getKidsResponse> {
+    const response = [];
     try {
-      const kids = await this.getAll('kids');
+      const documents = await this.getCollection('kids');
+      documents.forEach((doc) => {
+        response.push({ id: doc.id, ...doc.data() });
+      });
+      const kids = response.sort((a, b) => a.code - b.code);
+
       this.logService.verbose('Success to get kids', 'KidService.getKids()');
+
       return {
         statusCode: HttpStatus.OK,
         message: 'Success to get kids',
@@ -35,7 +54,7 @@ export class KidService {
     }
   }
 
-  async createKid(createKidDto: CreateKidDto) {
+  async createKid(createKidDto: CreateKidDto): Promise<CreateKidResponseDto> {
     try {
       const docRef = await addDoc(collection(this.firestore, 'kids'), {
         ...createKidDto,
@@ -48,7 +67,7 @@ export class KidService {
       return {
         statusCode: HttpStatus.CREATED,
         message: 'Success to create kid',
-        data: { kidId: docRef.id },
+        kidId: docRef.id,
       };
     } catch (error) {
       console.error('Error adding document: ', error);
@@ -62,16 +81,45 @@ export class KidService {
     }
   }
 
-  private async getAll(collectionName: string) {
+  async getKid(kidId: string): Promise<getKidResponse> {
     const response = [];
     try {
-      const querySnapshot = await getDocs(
+      const documents = await this.getCollection('kids');
+      documents.forEach((doc) => {
+        if (doc.id === kidId) {
+          response.push({ id: doc.id, ...doc.data() });
+          return;
+        }
+      });
+      if (response.length === 0) {
+        throw new HttpException('Not found kid', HttpStatus.NOT_FOUND);
+      }
+      this.logService.verbose(
+        `Success to get kid - id: ${kidId}`,
+        'KidService.getKid()',
+      );
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Success to get kids',
+        data: response[0],
+      };
+    } catch (error) {
+      console.error('Error getting documents: ', error);
+      if (error instanceof HttpException) {
+        return {
+          statusCode: error.getStatus(),
+          message: error.message,
+        };
+      }
+    }
+  }
+
+  private async getCollection(collectionName: string) {
+    try {
+      const collectionRef = await getDocs(
         collection(this.firestore, collectionName),
       );
-      querySnapshot.forEach((doc) => {
-        response.push({ id: doc.id, ...doc.data() });
-      });
-      return response.sort((a, b) => a.code - b.code);
+      return collectionRef;
     } catch (error) {
       console.error('Error getting documents: ', error);
     }
