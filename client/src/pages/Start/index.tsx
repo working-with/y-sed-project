@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
+import useCloseBtn from "../../hooks/useCloseBtn";
 import { userInfoAtom } from "../../recoil/atoms/user.atom";
 import getName from "../../utils/getName";
 
 import * as S from "./index.styled";
 
 import Button from "../../components/common/Button";
-import useCloseBtn from "../../hooks/useCloseBtn";
 
 function Start() {
   useCloseBtn();

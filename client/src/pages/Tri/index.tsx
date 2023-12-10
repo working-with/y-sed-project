@@ -4,11 +4,11 @@ import { useRecoilValue } from "recoil";
 
 import { userInfoAtom } from "../../recoil/atoms/user.atom";
 import getName from "../../utils/getName";
+import useCloseBtn from "../../hooks/useCloseBtn";
 
 import * as S from "./index.styled";
 
 import Bottom from "../../components/common/Bottom";
-import useCloseBtn from "../../hooks/useCloseBtn";
 
 function Tri() {
   useCloseBtn();
