@@ -1,10 +1,19 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+import { FirebaseModule } from './firebase/firebase.module';
+import { ExperimentModule } from './experiment/experiment.module';
+import { validationSchema } from './firebase/validation.schema';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      validationSchema,
+    }),
+    ExperimentModule,
+    FirebaseModule,
+  ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
