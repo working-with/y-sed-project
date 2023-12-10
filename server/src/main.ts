@@ -18,8 +18,8 @@ async function bootstrap() {
   SwaggerModule.setup('api/v1/document', app, document);
 
   app.enableCors({
-    origin: true,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    origin: '*',
+    methods: 'GET,PUT,PATCH,POST,DELETE',
   });
   await app.listen(port);
 }
