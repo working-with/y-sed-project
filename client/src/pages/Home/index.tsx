@@ -6,10 +6,11 @@ import useCloseBtn from "../../hooks/useCloseBtn";
 import validateInput from "../../utils/validateInput";
 import axiosRequest from "../../api";
 import { KidInformation, ResData } from "../../@types";
+import MESSAGE from "../../constants/message";
 
 import * as S from "./index.styled";
+
 import Button from "../../components/common/Button";
-import MESSAGE from "../../constants/message";
 
 function Home() {
   useCloseBtn();

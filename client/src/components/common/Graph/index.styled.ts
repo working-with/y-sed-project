@@ -11,7 +11,7 @@ export const GraphItem = styled.div<GraphProps>`
   border-radius: 24px;
   cursor: pointer;
 
-  &:hover {
+  > div:hover {
     background: ${({ theme }) => theme.PALETTE.orange[400]};
   }
 

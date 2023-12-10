@@ -73,23 +73,23 @@ const router = createBrowserRouter([
 
       // 퀴즈 페이지
       {
-        path: "/quiz/:experimentId/begin",
+        path: "/quiz/:experimentId/begin/:oxId",
         element: <Begin />,
       },
       {
-        path: "quiz/:experimentId/narration",
+        path: "/quiz/:experimentId/narration/:oxId",
         element: <Narration />,
       },
       {
-        path: "quiz/:experimentId/content",
+        path: "/quiz/:experimentId/content/:oxId",
         element: <Content />,
       },
       {
-        path: "quiz/:experimentId/so",
+        path: "/quiz/:experimentId/so/:oxId",
         element: <So />,
       },
       {
-        path: "quiz/:experimentId/next",
+        path: "/quiz/:experimentId/next/:oxId",
         element: <Next />,
       },
 

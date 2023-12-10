@@ -1,8 +1,20 @@
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
 import * as S from "./index.styled";
 
 import Bottom from "../../../components/common/Bottom";
 
 function Narration() {
+  const navigate = useNavigate();
+  const params = useParams();
+
+  useEffect(() => {
+    setTimeout(() => {
+      navigate(`/quiz/${params.experimentId}/content/0`);
+    }, 10000);
+  }, []);
+
   return (
     <S.Body>
       <S.Content>

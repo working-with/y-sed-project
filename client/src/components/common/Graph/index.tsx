@@ -1,28 +1,24 @@
-import { useState } from "react";
-
 import * as S from "./index.styled";
 
 export interface GraphProps {
-  onGraphClick?: (index: number) => void;
+  onClick?: (index: number) => void;
   clicked?: boolean;
+  index?: number | null;
 }
 
-function Graph({ onGraphClick }: GraphProps) {
-  const [clickedGraph, setClickedGraph] = useState<number | null>(null);
-
+function Graph({ onClick, index }: GraphProps) {
   const handleGraphClick = (index: number) => {
-    if (onGraphClick) {
-      onGraphClick(index);
-      setClickedGraph(index);
+    if (onClick) {
+      onClick(index);
     }
   };
 
   return (
     <S.Body>
-      <S.First clicked={clickedGraph === 0} onClick={() => handleGraphClick(0)} />
-      <S.Second clicked={clickedGraph === 1} onClick={() => handleGraphClick(1)} />
-      <S.Third clicked={clickedGraph === 2} onClick={() => handleGraphClick(2)} />
-      <S.Fourth clicked={clickedGraph === 3} onClick={() => handleGraphClick(3)} />
+      <S.First clicked={index === 0} onClick={() => handleGraphClick(0)} />
+      <S.Second clicked={index === 1} onClick={() => handleGraphClick(1)} />
+      <S.Third clicked={index === 2} onClick={() => handleGraphClick(2)} />
+      <S.Fourth clicked={index === 3} onClick={() => handleGraphClick(3)} />
     </S.Body>
   );
 }

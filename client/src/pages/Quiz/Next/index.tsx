@@ -1,3 +1,5 @@
+import { useNavigate, useParams } from "react-router-dom";
+
 import * as S from "./index.styled";
 
 import Bottom from "../../../components/common/Bottom";
@@ -10,6 +12,19 @@ const imgSrc = {
 };
 
 function Next() {
+  const navigate = useNavigate();
+  const params = useParams();
+
+  const { experimentId, oxId } = params;
+
+  const handleNextClick = () => {
+    if (oxId === "2") {
+      navigate(`/quiz/${Number(experimentId) + 1}/begin/${(Number(oxId) + 1) % 3}`);
+    } else {
+      navigate(`/quiz/${experimentId}/content/${Number(oxId) + 1}`);
+    }
+  };
+
   return (
     <S.Body>
       <S.Content>
@@ -18,7 +33,9 @@ function Next() {
         </S.Top>
 
         <S.Middle>
-          <Button variant="green">다음으로</Button>
+          <Button variant="green" onClick={handleNextClick}>
+            다음으로
+          </Button>
         </S.Middle>
       </S.Content>
 
