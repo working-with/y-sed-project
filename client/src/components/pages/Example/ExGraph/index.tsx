@@ -40,11 +40,11 @@ function ExGraph({ sad }: ExGraphProps) {
       {!btnClick && (
         <>
           <S.Content>
-            <Graph onGraphClick={handleGraphClick} />
+            <Graph onClick={handleGraphClick} index={selectedIndex} />
           </S.Content>
 
-          <Bottom button={true} color={selectedIndex ? "bluePlay" : ""} onClick={handleBlueBtnClick}>
-            {selectedIndex
+          <Bottom button={true} color={selectedIndex !== null ? "bluePlay" : ""} onClick={handleBlueBtnClick}>
+            {selectedIndex !== null
               ? sad
                 ? `와! 좋았어\n다음으로 가볼까?`
                 : `잘했어!\n이제 옆에 파란 버튼을 눌러보자.`
