@@ -1,9 +1,16 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  updateDoc,
+} from 'firebase/firestore';
 import { FirebaseService } from 'src/firebase/firebase.service';
 import { LogService } from 'src/util/logger';
 import { CreateKidDto, CreateKidResponseDto } from './dto/create.dto';
 import { getKidResponse, getKidsResponse } from './dto/get.dto';
+import { UpdateKidAnswerDto, updateKidAnswerResponse } from './dto/update.dto';
 
 @Injectable()
 export class KidService {
@@ -98,6 +105,38 @@ export class KidService {
         return {
           statusCode: error.getStatus(),
           message: error.message,
+        };
+      }
+    }
+  }
+
+  async updateKidAnswer(
+    kidId: string,
+    updateKidAnswer: UpdateKidAnswerDto,
+  ): Promise<updateKidAnswerResponse> {
+    try {
+      const { answer } = updateKidAnswer;
+      const kidRef = doc(this.firestore, 'kids', kidId);
+      await updateDoc(kidRef, {
+        answer,
+      });
+      // kidRef.get();
+      this.logService.verbose(
+        `Document written with ID: ${kidRef.id}`,
+        'KidService.updateKidAnswer()',
+      );
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Success to update kid answer',
+        kidId: kidRef.id,
+      };
+    } catch (error) {
+      console.error('Error updating document: ', error);
+      if (error instanceof HttpException) {
+        return {
+          statusCode: error.getStatus(),
+          message: error.message,
+          error: error.stack,
         };
       }
     }
