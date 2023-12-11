@@ -10,7 +10,7 @@ import {
 import { KidService } from './kid.service';
 import { CreateKidDto, CreateKidResponseDto } from './dto/create.dto';
 import { LoggingInterceptor } from 'src/interceptor/logging.interceptor';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { getKidResponse, getKidsResponse } from './dto/get.dto';
 import { UpdateKidAnswerDto, updateKidAnswerResponse } from './dto/update.dto';
 
@@ -37,6 +37,18 @@ export class KidController {
     return await this.kidService.getKid(kidId);
   }
 
+  @ApiBody({
+    type: UpdateKidAnswerDto,
+    description: 'X: 0, O: 1 / scale: 1 ~ 4',
+    examples: {
+      'kid answer ex-1 ("X"를 입력했을 떄)': {
+        value: { answer: [0, null, 0, null] },
+      },
+      'kid answer ex-2 ("O"를 입력했을 떄)': {
+        value: { answer: [1, 2, 1, 1] },
+      },
+    },
+  })
   @Patch(':kidId')
   async updateKidAnswer(
     @Param('kidId') kidId: string,
