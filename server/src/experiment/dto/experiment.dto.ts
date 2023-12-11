@@ -1,7 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsEnum } from 'class-validator';
 import { ImageDto } from './image.dto';
-import { Gender } from '../../kid/dto/answer.dto';
+
+export enum Gender {
+  F = 0,
+  M = 1,
+}
 
 export class ExperimentDto {
   @ApiProperty()
