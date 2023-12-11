@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { FirebaseService } from 'src/firebase/firebase.service';
-import { getExperimentsResponse } from './dto/get.dto';
+import { getExperimentsResponse, getTestScriptsResponse } from './dto/get.dto';
 import { LogService } from 'src/util/logger';
 import { Gender } from 'src/kid/dto/kid.dto';
 
@@ -21,20 +21,22 @@ export class ExperimentService {
     gender?: Gender,
   ): Promise<getExperimentsResponse> {
     const response = [];
-    const data = [];
+    let data = [];
     try {
       const collectionRef = collection(this.firestore, 'experiments');
       if (!isNaN(gender)) {
         const genderQuery = query(collectionRef, where('gender', '==', gender));
         const documents = await getDocs(genderQuery);
         documents.forEach((doc) => {
-          response.push({ id: doc.id, ...doc.data() });
+          data.push({ id: doc.id, ...doc.data() });
         });
+        data = data.sort((a, b) => a.code - b.code);
       } else {
         const documents = await getDocs(collectionRef);
         documents.forEach((doc) => {
           response.push({ id: doc.id, ...doc.data() });
         });
+        data = response.sort((a, b) => a.code - b.code);
       }
       this.logService.verbose(
         `Success to get experiments - gender: ${gender}`,
@@ -43,7 +45,45 @@ export class ExperimentService {
       return {
         statusCode: HttpStatus.OK,
         message: 'Success to get experiments',
-        data: response,
+        data,
+      };
+    } catch (error) {
+      console.error('Error getting documents: ', error);
+      if (error instanceof HttpException) {
+        return {
+          statusCode: error.getStatus(),
+          message: error.message,
+        };
+      }
+    }
+  }
+
+  async getTestScripts(code: string): Promise<getTestScriptsResponse> {
+    const response = [];
+    let data = [];
+    try {
+      const collectionRef = collection(this.firestore, 'tests');
+      if (code) {
+        const codeQuery = query(collectionRef, where('code', '==', code));
+        const documents = await getDocs(codeQuery);
+        documents.forEach((doc) => {
+          data.push({ id: doc.id, ...doc.data() });
+        });
+      } else {
+        const documents = await getDocs(collectionRef);
+        documents.forEach((doc) => {
+          response.push({ id: doc.id, ...doc.data() });
+        });
+        data = response.sort((a, b) => a.code - b.code);
+      }
+      this.logService.verbose(
+        `Success to get test scripts - code: ${code}`,
+        'ExperimentService.getTestScripts()',
+      );
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Success to get test scripts',
+        data,
       };
     } catch (error) {
       console.error('Error getting documents: ', error);

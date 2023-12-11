@@ -9,6 +9,7 @@ import { ExperimentService } from './experiment.service';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { LoggingInterceptor } from 'src/interceptor/logging.interceptor';
 import { Gender } from 'src/kid/dto/kid.dto';
+import { getExperimentsResponse, getTestScriptsResponse } from './dto/get.dto';
 
 @ApiTags('Experiment')
 @UseInterceptors(LoggingInterceptor)
@@ -16,12 +17,6 @@ import { Gender } from 'src/kid/dto/kid.dto';
 export class ExperimentController {
   constructor(private readonly experimentService: ExperimentService) {}
 
-  // @ApiQuery({
-  //   name: 'code',
-  //   required: false,
-  //   description: 'experiment Code like 01, 02 ,...',
-  //   example: '01',
-  // })
   @ApiQuery({
     name: 'gender',
     required: false,
@@ -31,7 +26,19 @@ export class ExperimentController {
   async getExperimentsByCode(
     // @Query('code') code?: string,
     @Query('gender', new ParseIntPipe({ optional: true })) gender?: Gender,
-  ) {
+  ): Promise<getExperimentsResponse> {
     return await this.experimentService.getExperiments(+gender);
+  }
+
+  @ApiQuery({
+    name: 'code',
+    required: false,
+    example: '01',
+  })
+  @Get('script')
+  async getTestScripts(
+    @Query('code') code: string,
+  ): Promise<getTestScriptsResponse> {
+    return await this.experimentService.getTestScripts(code);
   }
 }
