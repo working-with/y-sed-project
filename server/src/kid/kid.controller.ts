@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   Post,
   UseInterceptors,
 } from '@nestjs/common';
@@ -11,6 +12,7 @@ import { CreateKidDto, CreateKidResponseDto } from './dto/create.dto';
 import { LoggingInterceptor } from 'src/interceptor/logging.interceptor';
 import { ApiTags } from '@nestjs/swagger';
 import { getKidResponse, getKidsResponse } from './dto/get.dto';
+import { UpdateKidAnswerDto, updateKidAnswerResponse } from './dto/update.dto';
 
 @ApiTags('Kid')
 @UseInterceptors(LoggingInterceptor)
@@ -33,5 +35,13 @@ export class KidController {
   @Get(':kidId')
   async getKid(@Param('kidId') kidId: string): Promise<getKidResponse> {
     return await this.kidService.getKid(kidId);
+  }
+
+  @Patch(':kidId')
+  async updateKidAnswer(
+    @Param('kidId') kidId: string,
+    @Body() updateKidAnswer: UpdateKidAnswerDto,
+  ): Promise<updateKidAnswerResponse> {
+    return await this.kidService.updateKidAnswer(kidId, updateKidAnswer);
   }
 }
