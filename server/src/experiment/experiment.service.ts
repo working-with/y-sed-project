@@ -17,43 +17,27 @@ export class ExperimentService {
   }
 
   async getExperiments(
-    code?: string,
+    // code?: string,
     gender?: Gender,
   ): Promise<getExperimentsResponse> {
     const response = [];
     const data = [];
     try {
       const collectionRef = collection(this.firestore, 'experiments');
-      if (code && gender === undefined) {
-        console.log('code', code);
-        const codeQuery = query(collectionRef, where('code', '==', code));
-        const documents = await getDocs(codeQuery);
-        documents.forEach((doc) => {
-          response.push({ id: doc.id, ...doc.data() });
-        });
-      } else if (code === undefined && gender) {
-        console.log('gender', gender);
+      if (!isNaN(gender)) {
         const genderQuery = query(collectionRef, where('gender', '==', gender));
         const documents = await getDocs(genderQuery);
         documents.forEach((doc) => {
           response.push({ id: doc.id, ...doc.data() });
         });
-      } else if (gender && code) {
-        console.log('code', code, gender);
-        response.forEach((res) => {
-          if (res['gender'] === +gender) {
-            data.push(res);
-          }
-        });
-      } else if (!(code || gender)) {
-        console.log('gender', gender, code);
+      } else {
         const documents = await getDocs(collectionRef);
         documents.forEach((doc) => {
           response.push({ id: doc.id, ...doc.data() });
         });
       }
       this.logService.verbose(
-        `Success to get experiments - code: ${code}, gender: ${gender}`,
+        `Success to get experiments - gender: ${gender}`,
         'ExperimentService.getExperiments()',
       );
       return {
