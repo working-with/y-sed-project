@@ -16,12 +16,12 @@ import { Gender } from 'src/kid/dto/kid.dto';
 export class ExperimentController {
   constructor(private readonly experimentService: ExperimentService) {}
 
-  @ApiQuery({
-    name: 'code',
-    required: false,
-    description: 'experiment Code like 01, 02 ,...',
-    example: '01',
-  })
+  // @ApiQuery({
+  //   name: 'code',
+  //   required: false,
+  //   description: 'experiment Code like 01, 02 ,...',
+  //   example: '01',
+  // })
   @ApiQuery({
     name: 'gender',
     required: false,
@@ -29,9 +29,9 @@ export class ExperimentController {
   })
   @Get()
   async getExperimentsByCode(
-    @Query('code') code?: string,
+    // @Query('code') code?: string,
     @Query('gender', new ParseIntPipe({ optional: true })) gender?: Gender,
   ) {
-    return await this.experimentService.getExperiments(code, gender);
+    return await this.experimentService.getExperiments(+gender);
   }
 }
