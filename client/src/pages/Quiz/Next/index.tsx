@@ -26,17 +26,11 @@ function Next() {
     }
   };
 
-  const [status, setStatus] = useState<number>(0);
-
-  useEffect(() => {
-    setStatus(numberOxId);
-  }, []);
-
   return (
     <S.Body>
       <S.Content>
         <S.Top>
-          <StatusBar status={status} />
+          <StatusBar status={numberOxId} />
         </S.Top>
 
         <S.Middle>
