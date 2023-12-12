@@ -56,7 +56,7 @@ const axiosRequest: AxiosRequest = {
     } catch (error) {
       // TODO: 에러 처리를 클라이언트에서 바로 할 수 있도록 구성 해야 한다.
       // react error boundary
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   },
