@@ -7,7 +7,6 @@ const allowMethod: string[] = ["get", "post", "put", "patch", "delete"];
 const instance = axios.create({
   baseURL: "http://localhost:8080/api",
   timeout: 5000,
-  withCredentials: true,
 });
 
 instance.defaults.headers.post["Content-Type"] = "application/json";
