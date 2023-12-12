@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+import getRandomNext from "../../../utils/getNextMessage";
+import NEXT_MESSAGE from "../../../constants/nextMessage";
+
 import * as S from "./index.styled";
 
 import Bottom from "../../../components/common/Bottom";
@@ -12,19 +15,21 @@ function Next() {
   const params = useParams();
 
   const { experimentId, oxId } = params;
+  const numberOxId = Number(oxId);
+  const experiment = Number(experimentId);
 
   const handleNextClick = () => {
     if (oxId === "2") {
-      navigate(`/quiz/${Number(experimentId) + 1}/begin/${(Number(oxId) + 1) % 3}`);
+      navigate(`/quiz/${experiment + 1}/begin/${(numberOxId + 1) % 3}`);
     } else {
-      navigate(`/quiz/${experimentId}/content/${Number(oxId) + 1}`);
+      navigate(`/quiz/${experimentId}/content/${numberOxId + 1}`);
     }
   };
 
   const [status, setStatus] = useState<number>(0);
 
   useEffect(() => {
-    setStatus(Number(params.oxId));
+    setStatus(numberOxId);
   }, []);
 
   return (
@@ -41,7 +46,7 @@ function Next() {
         </S.Middle>
       </S.Content>
 
-      <Bottom>대사</Bottom>
+      <Bottom>{numberOxId === 2 ? NEXT_MESSAGE[experiment] : getRandomNext()}</Bottom>
     </S.Body>
   );
 }
