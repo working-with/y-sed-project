@@ -93,7 +93,7 @@ const router = createBrowserRouter([
         element: <Next />,
       },
 
-      // 종료 페이지 및 탈출
+      // 퀴즈 및 강제 종료 페이지
       {
         path: "finish",
         element: <Finish />,

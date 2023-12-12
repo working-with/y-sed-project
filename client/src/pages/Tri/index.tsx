@@ -27,8 +27,8 @@ function Tri() {
   return (
     <S.Body>
       <S.ImgBox>
-        <img src={`/assets/img/storyImg/1/1-${userInfo.gender === "여자" ? "G1" : "B1"}.svg`} />
-        <img src={`/assets/img/storyImg/7/7-${userInfo.gender === "여자" ? "G1" : "B1"}.svg`} />
+        <img src={`/assets/img/storyImg/1/1-${userInfo.gender ? "B1" : "G1"}.svg`} alt="tri_image" />
+        <img src={`/assets/img/storyImg/7/7-${userInfo.gender ? "B1" : "G1"}.svg`} alt="tri_image" />
       </S.ImgBox>
 
       <Bottom>

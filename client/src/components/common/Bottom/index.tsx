@@ -26,7 +26,7 @@ function Bottom({ children, color, button, top, onClick }: BottomProps) {
 
       {button && (
         <S.Button onClick={onClick}>
-          <img src={`/assets/img/icon/${color ? color : "grayPlay"}.svg`} />
+          <img src={`/assets/img/icon/${color ? color : "grayPlay"}.svg`} alt="button" />
         </S.Button>
       )}
     </S.Body>

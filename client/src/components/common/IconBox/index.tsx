@@ -7,7 +7,7 @@ interface IconProps {
 function IconBox({ iconName }: IconProps) {
   return (
     <S.Icon>
-      <img src={`/assets/img/icon/${iconName}.svg`} />
+      <img src={`/assets/img/icon/${iconName}.svg`} alt="emotion_icon" />
     </S.Icon>
   );
 }
