@@ -9,6 +9,7 @@ import common from "../../../utils/common";
 import * as S from "./index.styled";
 
 import Bottom from "../../../components/common/Bottom";
+import StatusBar from "../../../components/common/StatusBar";
 
 function Content() {
   const navigate = useNavigate();
@@ -29,18 +30,24 @@ function Content() {
     } else navigate(`/quiz/${params.experimentId}/next/${params.oxId}`);
   };
 
+  const [status, setStatus] = useState<number>(0);
+
+  useEffect(() => {
+    setStatus(Number(params.oxId));
+  }, []);
+
   return (
     <S.Body>
       <S.Content>
         <S.Qox>
           <div>
-            <img src="/assets/img/icon/blueO.svg" onClick={handleOClick} />
-            <img src="/assets/img/icon/redX.svg" onClick={handleXClick} />
+            <img src="/assets/img/icon/blueO.svg" alt="O" onClick={handleOClick} />
+            <img src="/assets/img/icon/redX.svg" alt="X" onClick={handleXClick} />
           </div>
         </S.Qox>
 
-        <img src="/assets/img/icon/0.svg" />
-        <img src="/assets/img/storyImg/1/1-G1.svg" />
+        <StatusBar status={status} />
+        <img src="/assets/img/storyImg/1/1-G1.svg" alt="storyImage" />
       </S.Content>
 
       <Bottom>{QOX}</Bottom>
