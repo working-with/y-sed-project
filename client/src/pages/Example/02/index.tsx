@@ -23,8 +23,6 @@ function Ex02() {
   const [third, setThird] = useState(false);
   const [fourth, setFourth] = useState(false);
 
-  const delay = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
-
   useEffect(() => {
     let timeoutId1: NodeJS.Timeout;
     let timeoutId2: NodeJS.Timeout;
