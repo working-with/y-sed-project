@@ -8,6 +8,7 @@ import common from "../../utils/common";
 import * as S from "./index.styled";
 
 import Bottom from "../../components/common/Bottom";
+import StatusBar from "../../components/common/StatusBar";
 
 function Finish() {
   const [finish, setFinish] = useState(true);
@@ -22,11 +23,11 @@ function Finish() {
       <S.Content>
         {finish ? (
           <>
-            <img src="/assets/img/icon/100.svg" />
-            <img src="/assets/img/icon/happyIcon.svg" />
+            <StatusBar status={100} />
+            <img src="/assets/img/icon/happyIcon.svg" alt="yeonsuri" />
           </>
         ) : (
-          <img src="/assets/img/icon/smileIcon.svg" />
+          <img src="/assets/img/icon/smileIcon.svg" alt="yeonsuri" />
         )}
       </S.Content>
 

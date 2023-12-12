@@ -10,11 +10,12 @@ export const Top = styled.div``;
 export const Content = styled.div`
   ${height}
   ${flexCenter}
-    flex-direction: column;
+  flex-direction: column;
   gap: 140px;
 
   > img:nth-child(2) {
     width: 861px;
     height: 633.361px;
+    margin: 30px 0 110px 0;
   }
 `;

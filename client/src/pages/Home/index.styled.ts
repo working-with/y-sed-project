@@ -43,4 +43,13 @@ export const Input = styled.input`
 export const ButtonBox = styled.div`
   ${flexCenter}
   gap: 200px;
+
+  & a {
+    color: ${({ theme }) => theme.PALETTE.white};
+    text-decoration: none;
+  }
+
+  & a:visited {
+    color: ${({ theme }) => theme.PALETTE.white};
+  }
 `;

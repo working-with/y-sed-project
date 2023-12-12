@@ -1,0 +1,70 @@
+const getHeaders = [
+  { label: "code", key: "code" },
+  { label: "name", key: "name" },
+  { label: "sex", key: "gender" },
+
+  { label: "n_01_01SOX", key: "n_01_01SOX" },
+  { label: "n_01_01SO", key: "n_01_01SO" },
+  { label: "n_01_02SOX", key: "n_01_02SOX" },
+  { label: "n_01_02SO", key: "n_01_02SO" },
+  { label: "n_01_03SOX", key: "n_01_03SOX" },
+  { label: "n_01_03SO", key: "n_01_03SO" },
+
+  { label: "n_02_01SOX", key: "n_02_01SOX" },
+  { label: "n_02_01SO", key: "n_02_01SO" },
+  { label: "n_02_02SOX", key: "n_02_02SOX" },
+  { label: "n_02_02SO", key: "n_02_02SO" },
+  { label: "n_02_03SOX", key: "n_02_03SOX" },
+  { label: "n_02_03SO", key: "n_02_03SO" },
+
+  { label: "n_03_01SOX", key: "n_03_01SOX" },
+  { label: "n_03_01SO", key: "n_03_01SO" },
+  { label: "n_03_02SOX", key: "n_03_02SOX" },
+  { label: "n_03_02SO", key: "n_03_02SO" },
+  { label: "n_03_03SOX", key: "n_03_03SOX" },
+  { label: "n_03_03SO", key: "n_03_03SO" },
+
+  { label: "n_04_01SOX", key: "n_04_01SOX" },
+  { label: "n_04_01SO", key: "n_04_01SO" },
+  { label: "n_04_02SOX", key: "n_04_02SOX" },
+  { label: "n_04_02SO", key: "n_04_02SO" },
+  { label: "n_04_03SOX", key: "n_04_03SOX" },
+  { label: "n_04_03SO", key: "n_04_03SO" },
+
+  { label: "n_05_01SOX", key: "n_05_01SOX" },
+  { label: "n_05_01SO", key: "n_05_01SO" },
+  { label: "n_05_02SOX", key: "n_05_02SOX" },
+  { label: "n_05_02SO", key: "n_05_02SO" },
+  { label: "n_05_03SOX", key: "n_05_03SOX" },
+  { label: "n_05_03SO", key: "n_05_03SO" },
+
+  { label: "n_06_01SOX", key: "n_06_01SOX" },
+  { label: "n_06_01SO", key: "n_06_01SO" },
+  { label: "n_06_02SOX", key: "n_06_02SOX" },
+  { label: "n_06_02SO", key: "n_06_02SO" },
+  { label: "n_06_03SOX", key: "n_06_03SOX" },
+  { label: "n_06_03SO", key: "n_06_03SO" },
+
+  { label: "n_07_01SOX", key: "n_07_01SOX" },
+  { label: "n_07_01SO", key: "n_07_01SO" },
+  { label: "n_07_02SOX", key: "n_07_02SOX" },
+  { label: "n_07_02SO", key: "n_07_02SO" },
+  { label: "n_07_03SOX", key: "n_07_03SOX" },
+  { label: "n_07_03SO", key: "n_07_03SO" },
+
+  { label: "n_08_01SOX", key: "n_08_01SOX" },
+  { label: "n_08_01SO", key: "n_08_01SO" },
+  { label: "n_08_02SOX", key: "n_08_02SOX" },
+  { label: "n_08_02SO", key: "n_08_02SO" },
+  { label: "n_08_03SOX", key: "n_08_03SOX" },
+  { label: "n_08_03SO", key: "n_08_03SO" },
+
+  { label: "n_09_01SOX", key: "n_09_01SOX" },
+  { label: "n_09_01SO", key: "n_09_01SO" },
+  { label: "n_09_02SOX", key: "n_09_02SOX" },
+  { label: "n_09_02SO", key: "n_09_02SO" },
+  { label: "n_09_03SOX", key: "n_09_03SOX" },
+  { label: "n_09_03SO", key: "n_09_03SO" },
+];
+
+export default getHeaders;

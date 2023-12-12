@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -9,6 +10,7 @@ import * as S from "./index.styled";
 
 import Graph from "../../../components/common/Graph";
 import Bottom from "../../../components/common/Bottom";
+import StatusBar from "../../../components/common/StatusBar";
 
 function So() {
   const navigate = useNavigate();
@@ -25,9 +27,19 @@ function So() {
     } else navigate(`/quiz/${params.experimentId}/next/${params.oxId}`);
   };
 
+  const [status, setStatus] = useState<number>(0);
+
+  useEffect(() => {
+    setStatus(Number(params.oxId));
+  }, []);
+
   return (
     <S.Body>
       <S.Content>
+        <S.Status>
+          <StatusBar status={status} />
+        </S.Status>
+
         <Graph />
       </S.Content>
 
