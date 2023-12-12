@@ -14,6 +14,9 @@ import IconBox from "../../../components/common/IconBox";
 function Ex01() {
   const navigate = useNavigate();
 
+  const userInfo = useRecoilValue(userInfoAtom);
+  const name = getName(userInfo.name);
+
   const [comment, setComment] = useState<boolean>(false);
   const [background, setBackground] = useState(false);
 
@@ -32,9 +35,6 @@ function Ex01() {
     }, 20000);
   }, []);
 
-  const userInfo = useRecoilValue(userInfoAtom);
-  const name = getName(userInfo.name);
-
   return (
     <S.Body>
       <S.Content>
@@ -43,8 +43,8 @@ function Ex01() {
             <S.Image src="/assets/img/icon/click.svg" />
             <S.Div>
               <div>
-                <img src="/assets/img/icon/blueO.svg" />
-                <img src="/assets/img/icon/redX.svg" />
+                <img src="/assets/img/icon/blueO.svg" alt="o" />
+                <img src="/assets/img/icon/redX.svg" alt="x" />
               </div>
             </S.Div>
           </>
