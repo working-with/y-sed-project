@@ -1,7 +1,7 @@
 import { Experiment } from "./Experiment";
 
 export interface KidInformation {
-  id: number;
+  kidId: number;
   code: string;
   name: string;
   gender: Gender;
