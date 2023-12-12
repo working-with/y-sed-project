@@ -33,6 +33,17 @@ function So() {
     setStatus(Number(params.oxId));
   }, []);
 
+  // graph click
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  const handleGraphClick = (index: number) => {
+    setSelectedIndex(prevIndex => (prevIndex === index ? null : index));
+  };
+
+  useEffect(() => {
+    console.log(selectedIndex);
+  }, [selectedIndex]);
+
   return (
     <S.Body>
       <S.Content>
@@ -40,7 +51,7 @@ function So() {
           <StatusBar status={status} />
         </S.Status>
 
-        <Graph />
+        <Graph onClick={handleGraphClick} index={selectedIndex} />
       </S.Content>
 
       <Bottom button={true} color="bluePlay" onClick={handleBtnClick}>

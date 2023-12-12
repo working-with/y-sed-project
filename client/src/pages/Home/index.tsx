@@ -27,7 +27,7 @@ function Home() {
     const { name, value } = e.target;
 
     // 여자: 0 / 남자: 1
-    setUserInfo((prev: any) => ({
+    setUserInfo((prev: KidInformation) => ({
       ...prev,
       [name]: value,
       gender: value === "여자" ? 0 : 1,
@@ -42,8 +42,14 @@ function Home() {
       alert(errorMessage);
     } else {
       const response = await axiosRequest.requestAxios<ResData<KidInformation>>("post", "/v1/kid", userInfo);
+      const data = response.data;
 
       if (response.status === STATUS_CODE.CREATED) {
+        setUserInfo((prev: KidInformation) => ({
+          ...prev,
+          kidId: data.kidId,
+        }));
+
         navigate("/start");
       }
     }

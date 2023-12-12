@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
 import useCloseBtn from "../../hooks/useCloseBtn";
@@ -17,8 +17,12 @@ function Start() {
 
   const [click, setClick] = useState(false);
 
-  const onClick = () => {
+  const handleBtnClick = () => {
     setClick(true);
+  };
+
+  const handleHelloClick = () => {
+    navigate("/tri");
   };
 
   const userInfo = useRecoilValue(userInfoAtom);
@@ -30,13 +34,13 @@ function Start() {
   return (
     <S.Body>
       <S.TitleBox>
-        {!click && <img src="/assets/img/icon/smileIcon.svg" />}
+        {!click && <img src="/assets/img/icon/smileIcon.svg" alt="smile_icon" />}
         {click && <span>안녕 {kidName}~!</span>}
       </S.TitleBox>
 
       <S.ButtonBox>
-        <Button variant="blue" onClick={onClick}>
-          {click ? <Link to="/tri">안녕?</Link> : "시작하기"}
+        <Button variant="blue" onClick={handleBtnClick}>
+          {click ? <div onClick={handleHelloClick}>안녕?</div> : "시작하기"}
         </Button>
       </S.ButtonBox>
     </S.Body>
