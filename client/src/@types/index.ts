@@ -1,5 +1,6 @@
 import { KidInformation } from "./KidInformation";
 import { Experiment } from "./Experiment";
+import { Script } from "./Script";
 import { Image } from "./Image";
 
 interface ResData<D> {
@@ -8,4 +9,4 @@ interface ResData<D> {
   data: D;
 }
 
-export type { ResData, KidInformation, Experiment, Image };
+export type { ResData, KidInformation, Experiment, Script, Image };
