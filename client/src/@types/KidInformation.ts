@@ -1,9 +1,12 @@
+import { Experiment } from "./Experiment";
+
 export interface KidInformation {
   id: number;
   code: string;
   name: string;
   gender: Gender;
-  experiment: string[];
+  experiment: Experiment[];
+  answer: string[];
 }
 
 enum Gender {
