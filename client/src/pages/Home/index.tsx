@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import { CSVLink } from "react-csv";
 
 import { userInfoAtom } from "../../recoil/atoms/user.atom";
 import useCloseBtn from "../../hooks/useCloseBtn";
@@ -7,12 +9,12 @@ import validateInput from "../../utils/validateInput";
 import axiosRequest from "../../api";
 import { KidInformation, ResData } from "../../@types";
 import MESSAGE from "../../constants/message";
+import STATUS_CODE from "../../constants/statusCode";
+import getHeaders from "../../utils/getHeaders";
 
 import * as S from "./index.styled";
 
 import Button from "../../components/common/Button";
-import { useEffect } from "react";
-import STATUS_CODE from "../../constants/statusCode";
 
 function Home() {
   useCloseBtn();
@@ -51,9 +53,16 @@ function Home() {
     }
   };
 
+  // excel-download
+  const [state, setState] = useState<KidInformation[]>([]);
+
+  const data = [{ name: "조아연", code: "A1234", gender: 0 }];
+
   const handleExcelDownClick = async () => {
     if (window.confirm(MESSAGE.EXCEL_DOWN)) {
-      // const response = await axiosRequest.requestAxios<ResData<KidInformation[]>>("get", "/v1/kid");
+      const response = await axiosRequest.requestAxios<ResData<KidInformation[]>>("get", "/v1/kid");
+      setState(response.data);
+      console.log(response.data);
     }
   };
 
@@ -83,7 +92,9 @@ function Home() {
 
         <S.ButtonBox>
           <Button variant="green" onClick={handleExcelDownClick}>
-            엑셀 다운
+            <CSVLink data={data} headers={getHeaders} filename="아동 실험 전체 코드">
+              엑셀 다운
+            </CSVLink>
           </Button>
 
           <Button variant="blue" onClick={handleStartClick}>
