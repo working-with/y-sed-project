@@ -16,6 +16,7 @@ function Exit() {
     navigate("/");
 
     setUserInfo({
+      kidId: "",
       name: "",
       gender: "",
       code: "",
