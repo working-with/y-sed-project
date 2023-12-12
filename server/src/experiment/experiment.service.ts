@@ -17,8 +17,8 @@ export class ExperimentService {
   }
 
   async getExperiments(
-    // code?: string,
     gender?: Gender,
+    code?: string,
   ): Promise<getExperimentsResponse> {
     const response = [];
     let data = [];
@@ -28,7 +28,9 @@ export class ExperimentService {
         const genderQuery = query(collectionRef, where('gender', '==', gender));
         const documents = await getDocs(genderQuery);
         documents.forEach((doc) => {
-          data.push({ id: doc.id, ...doc.data() });
+          if (doc.data().code === code) {
+            data.push({ id: doc.id, ...doc.data() });
+          }
         });
         data = data.sort((a, b) => a.code - b.code);
       } else {
@@ -93,17 +95,6 @@ export class ExperimentService {
           message: error.message,
         };
       }
-    }
-  }
-
-  private async getCollection(collectionName: string) {
-    try {
-      const collectionRef = await getDocs(
-        collection(this.firestore, collectionName),
-      );
-      return collectionRef;
-    } catch (error) {
-      console.error('Error getting documents: ', error);
     }
   }
 }

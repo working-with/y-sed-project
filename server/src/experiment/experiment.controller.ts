@@ -22,12 +22,17 @@ export class ExperimentController {
     required: false,
     example: 1,
   })
+  @ApiQuery({
+    name: 'code',
+    required: false,
+    example: '01',
+  })
   @Get()
   async getExperimentsByCode(
-    // @Query('code') code?: string,
     @Query('gender', new ParseIntPipe({ optional: true })) gender?: Gender,
+    @Query('code') code?: string,
   ): Promise<getExperimentsResponse> {
-    return await this.experimentService.getExperiments(+gender);
+    return await this.experimentService.getExperiments(+gender, code);
   }
 
   @ApiQuery({
