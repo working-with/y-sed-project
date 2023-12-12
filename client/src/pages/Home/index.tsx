@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { CSVLink } from "react-csv";
@@ -34,10 +34,6 @@ function Home() {
     }));
   };
 
-  useEffect(() => {
-    console.log(userInfo);
-  }, [userInfo]);
-
   const handleStartClick = async () => {
     const fail = validateInput(userInfo).filter(info => info.checked);
 
@@ -61,8 +57,8 @@ function Home() {
   const handleExcelDownClick = async () => {
     if (window.confirm(MESSAGE.EXCEL_DOWN)) {
       const response = await axiosRequest.requestAxios<ResData<KidInformation[]>>("get", "/v1/kid");
+
       setState(response.data);
-      console.log(response.data);
     }
   };
 
