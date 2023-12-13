@@ -28,8 +28,8 @@ export class ClovaService {
         'X-NCP-APIGW-API-KEY-ID': this.clovaConfig.clientId,
         'X-NCP-APIGW-API-KEY': this.clovaConfig.cliendtSecret,
       },
+      responseType: 'stream',
     });
-    console.log(response.headers);
     return response;
   }
 }
