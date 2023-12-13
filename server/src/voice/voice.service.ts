@@ -31,13 +31,8 @@ export class VoiceService {
         `Success to get voice`,
         'voiceService.getVoiceScript()',
       );
-      const res = await this.clovaService.getClovaTTS(voiceType, text);
-      const converted = Buffer.from(res.data).toString('base64');
-      return {
-        statusCode: HttpStatus.OK,
-        message: 'Success to get voice',
-        data: converted,
-      };
+      const response = await this.clovaService.getClovaTTS(voiceType, text);
+      return response.data;
     } catch (error) {
       console.error('Error getting voices: ', error);
       if (error instanceof HttpException) {
@@ -56,7 +51,6 @@ export class VoiceService {
       const storageRef = ref(this.storage, `voice/${name}-${script}`);
 
       await uploadString(storageRef, data);
-      console.log('Uploaded a blob or file!', storageRef);
       const downloadURL = await getDownloadURL(storageRef);
       this.logService.verbose(
         `Success to save voice`,
