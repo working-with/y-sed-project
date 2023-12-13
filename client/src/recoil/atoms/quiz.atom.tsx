@@ -5,6 +5,6 @@ const { persistAtom } = recoilPersist();
 
 export const quizAnswerAtom = atom({
   key: "quizAnswer",
-  default: "",
+  default: [],
   effects_UNSTABLE: [persistAtom],
 });
