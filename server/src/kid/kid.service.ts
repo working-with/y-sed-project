@@ -1,4 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import {
   addDoc,
   collection,
@@ -88,7 +93,7 @@ export class KidService {
         }
       });
       if (response.length === 0) {
-        throw new HttpException('Not found kid', HttpStatus.NOT_FOUND);
+        throw new NotFoundException('Not found kid');
       }
       this.logService.verbose(
         `Success to get kid - id: ${kidId}`,
