@@ -1,5 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { bodyContainer, flexCenter, height } from "../../../style/common";
+
+interface ImgProps {
+  yesBtn?: boolean;
+  noBtn?: boolean;
+}
 
 export const Body = styled.div`
   ${bodyContainer}
@@ -36,4 +41,20 @@ export const Qox = styled.div`
   & img:hover {
     transform: scale(1.3);
   }
+`;
+
+export const YesImg = styled.img<ImgProps>`
+  ${({ yesBtn }) =>
+    yesBtn &&
+    css`
+      transform: scale(1.3);
+    `}
+`;
+
+export const NoImg = styled.img<ImgProps>`
+  ${({ noBtn }) =>
+    noBtn &&
+    css`
+      transform: scale(1.3);
+    `}
 `;
