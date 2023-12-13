@@ -4,6 +4,7 @@ import { FirebaseModule } from './firebase/firebase.module';
 import { ExperimentModule } from './experiment/experiment.module';
 import { validationSchema } from './firebase/validation.schema';
 import { KidModule } from './kid/kid.module';
+import { VoiceModule } from './voice/voice.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { KidModule } from './kid/kid.module';
     }),
     ExperimentModule,
     KidModule,
+    VoiceModule,
     FirebaseModule,
   ],
   controllers: [],
