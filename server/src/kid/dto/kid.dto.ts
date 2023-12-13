@@ -6,6 +6,13 @@ export enum Gender {
   M = 1,
 }
 
+export class Survey {
+  [index: string]: {
+    booleanAnswer?: number;
+    scaleAnswer?: number;
+  };
+}
+
 export class KidDto {
   @ApiProperty()
   id: string;
@@ -27,5 +34,5 @@ export class KidDto {
 
   @ApiProperty()
   @IsOptional()
-  answer?: Array<number>;
+  survey?: Array<Survey>;
 }

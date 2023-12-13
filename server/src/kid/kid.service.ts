@@ -10,7 +10,7 @@ import { FirebaseService } from 'src/firebase/firebase.service';
 import { LogService } from 'src/util/logger';
 import { CreateKidDto, CreateKidResponseDto } from './dto/create.dto';
 import { getKidResponse, getKidsResponse } from './dto/get.dto';
-import { UpdateKidAnswerDto, updateKidAnswerResponse } from './dto/update.dto';
+import { UpdateKidSurveyDto, updateKidAnswerResponse } from './dto/update.dto';
 
 @Injectable()
 export class KidService {
@@ -110,24 +110,23 @@ export class KidService {
     }
   }
 
-  async updateKidAnswer(
+  async updateKidSurvey(
     kidId: string,
-    updateKidAnswer: UpdateKidAnswerDto,
+    updateKidSurvey: UpdateKidSurveyDto,
   ): Promise<updateKidAnswerResponse> {
     try {
-      const { answer } = updateKidAnswer;
+      const { survey } = updateKidSurvey;
       const kidRef = doc(this.firestore, 'kids', kidId);
       await updateDoc(kidRef, {
-        answer,
+        survey,
       });
-      // kidRef.get();
       this.logService.verbose(
         `Document written with ID: ${kidRef.id}`,
-        'KidService.updateKidAnswer()',
+        'KidService.updateKidSurvey()',
       );
       return {
         statusCode: HttpStatus.OK,
-        message: 'Success to update kid answer',
+        message: 'Success to update kid survey',
         kidId: kidRef.id,
       };
     } catch (error) {
