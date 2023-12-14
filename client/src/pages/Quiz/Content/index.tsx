@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -37,7 +37,7 @@ function Content() {
   const [status, setStatus] = useState<number>(11);
 
   // 백에서 받아오는 스크립트 받는 부분
-  const [script, setScript] = useState<Question[]>();
+  const [scripts, setScripts] = useState<Question[]>();
 
   useEffect(() => {
     const getContent = async () => {
@@ -48,7 +48,9 @@ function Content() {
       const data = response.data.data;
       const test = data[0].question;
 
-      setScript(test);
+      const q = test && test.filter(el => el.testCode && el.testCode.includes(`0${Number(oxId) + 1}`));
+
+      setScripts(q);
     };
 
     getContent();
@@ -58,24 +60,9 @@ function Content() {
   const [sqx, setSqx] = useState<boolean>(false);
 
   useEffect(() => {
-    // 퀴즈가 0번째 일 경우 status 변경은 qox 스크립트가 나온 후에 status를 변경해 줌
-    if (Number(oxId) === 0) {
-      setTimeout(() => {
-        // 백에서 받아온 스크립트 진행 후 퀴즈 문항에 대해 제대로 나오게 변경
-        setStatus(Number(oxId));
-
-        setTimeout(() => {
-          // qox -> 퀴즈 본문 -> sqx 스크립트 / ~이는 그럴 것 같아 부분
-          setSqx(true);
-        }, 10000);
-      }, 10000);
-    } else {
+    if (Number(oxId) !== 0) {
       // 퀴즈가 0번째가 아닐 경우 바로 변경
       setStatus(Number(oxId));
-
-      setTimeout(() => {
-        setSqx(true);
-      }, 10000);
     }
   }, []);
 
@@ -122,8 +109,66 @@ function Content() {
     }
   };
 
+  // tts
+  const [currentTTS, setCurrentTTS] = useState(0);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  const text =
+    Number(oxId) === 0 && (Number(experimentId) === 2 || Number(experimentId) === 8)
+      ? [QOX, scripts && scripts[0].script, scripts && scripts[1].script, SQX] // 1. 1번째 질문이고 실험 문항이 2, 8번인 경우
+      : Number(oxId) === 0
+      ? [QOX, scripts && scripts[0].script, SQX] // 2. 1번째 질문이고 2, 8이 아닌 경우
+      : Number(oxId) === 2 && Number(experimentId) === 9
+      ? [scripts && scripts[0].script, scripts && scripts[1].script, SQX] // 3. 3번째 질문이고 실험 문항이 9번일 경우
+      : [scripts && scripts[0].script, SQX]; // 4. 2, 3번째 질문
+
+  useEffect(() => {
+    const currentAudio = audioRef.current;
+
+    const plusCurrentTTS = () => {
+      setCurrentTTS((prev: number) => prev + 1);
+
+      if (Number(oxId) !== status) {
+        // 퀴즈가 0번째가 아닐 경우 바로 변경
+        setStatus(0);
+      }
+    };
+
+    if (currentAudio && text[currentTTS]) {
+      currentAudio.addEventListener("ended", plusCurrentTTS);
+
+      const getVoice = async () => {
+        const postData = {
+          name: userInfo.name,
+          voiceType: userInfo.gender ? "nhajun" : "vdain",
+          script: text[currentTTS],
+        };
+
+        const response = await axiosRequest.requestAxios<ResData<Blob>>("post", "/v1/voice", postData);
+        const data = response.data;
+
+        const url = URL.createObjectURL(new Blob([data]));
+
+        currentAudio.src = url;
+        currentAudio.play().catch(e => console.log(e));
+      };
+
+      getVoice();
+
+      if (text.length - 1 === currentTTS) {
+        setSqx(true);
+      }
+
+      return () => {
+        currentAudio.removeEventListener("ended", plusCurrentTTS);
+      };
+    }
+  }, [audioRef.current, currentTTS]);
+
   return (
     <S.Body>
+      <audio ref={audioRef} />
+
       <S.Content>
         <S.Qox>
           <div>
@@ -137,16 +182,8 @@ function Content() {
         <img src={image} alt="storyImage" />
       </S.Content>
 
-      {/* QOX -> script -> SQX */}
       <Bottom button={sqx && true} color={yesBtn || noBtn ? "bluePlay" : ""} onClick={handleNextBtnClick}>
-        {/* 1: 자 이제부터 내가 들려주는 말이 */}
-        {status === 11 && QOX}
-
-        {/* 2: 본문 */}
-        {status !== 11 && script && !sqx && `"${script[status].script}"`}
-
-        {/* 3: 니 마음과 같은지 아닌지 */}
-        {sqx && SQX}
+        {!text[currentTTS] ? text[text.length - 1] : `${text[currentTTS]}`.replace(/\\n/g, "\n")}
       </Bottom>
     </S.Body>
   );
