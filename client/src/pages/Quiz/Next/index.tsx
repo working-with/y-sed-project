@@ -80,6 +80,12 @@ function Next() {
           <StatusBar status={numberOxId} />
         </S.Top>
 
+        {numberOxId === 2 && (
+          <S.ImageBox>
+            <img src={`/assets/img/nextImage/nextImage${experimentId}.svg`} alt="nextImage" />
+          </S.ImageBox>
+        )}
+
         <S.Middle>
           <Button variant="green" onClick={handleNextClick}>
             다음으로
