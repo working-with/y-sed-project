@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
@@ -35,16 +35,56 @@ function Begin() {
     getImage();
   }, []);
 
+  // tts
+  const [currentTTS, setCurrentTTS] = useState(0);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  const text = ["이제 이야기를 들려줄 거야! 잘 들어보자."];
+
   useEffect(() => {
-    if (image) {
+    const currentAudio = audioRef.current;
+
+    const plusCurrentTTS = () => {
+      setCurrentTTS((prev: number) => prev + 1);
+    };
+
+    if (currentAudio && text[currentTTS]) {
+      currentAudio.addEventListener("ended", plusCurrentTTS);
+
+      const getVoice = async () => {
+        const postData = {
+          name: userInfo.name,
+          voiceType: userInfo.gender ? "nhajun" : "vdain",
+          script: text[currentTTS],
+        };
+
+        const response = await axiosRequest.requestAxios<ResData<Blob>>("post", "/v1/voice", postData);
+        const data = response.data;
+
+        const url = URL.createObjectURL(new Blob([data]));
+
+        currentAudio.src = url;
+        currentAudio.play().catch(e => console.log(e));
+      };
+
+      getVoice();
+
+      return () => {
+        currentAudio.removeEventListener("ended", plusCurrentTTS);
+      };
+    }
+
+    if (!text[currentTTS]) {
       setTimeout(() => {
         navigate(`/quiz/${experimentId}/narration/0`);
-      }, 20000);
+      }, 3000);
     }
-  }, []);
+  }, [audioRef.current, currentTTS]);
 
   return (
     <S.Body>
+      <audio ref={audioRef} />
+
       <S.Content>
         <img src={image && image} alt="begin_experiment_Image" />
       </S.Content>
