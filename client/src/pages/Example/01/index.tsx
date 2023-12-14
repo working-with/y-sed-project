@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
 import { userInfoAtom } from "../../../recoil/atoms/user.atom";
 import getName from "../../../utils/getName";
+import axiosRequest from "../../../api";
+import { ResData } from "../../../@types";
 
 import * as S from "./index.styled";
 
@@ -17,28 +19,61 @@ function Ex01() {
   const userInfo = useRecoilValue(userInfoAtom);
   const name = getName(userInfo.name);
 
-  const [comment, setComment] = useState<boolean>(false);
-  const [background, setBackground] = useState(false);
+  const [currentTTS, setCurrentTTS] = useState<number>(0);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  const text = [
+    `각 이야기 마다, ${name}가\n 느낄 수 있는 다양한 마음이 있어.`,
+    "이야기가 끝난 후에는 내가\n 이 마음에 대해 물어볼건데,",
+    `이 마음이 ${name}와 같은지 아닌지`,
+  ];
 
   useEffect(() => {
-    setTimeout(() => {
-      setComment(true);
+    const currentAudio = audioRef.current;
 
-      // gui03
+    const plusCurrentTTS = () => {
+      setCurrentTTS((prev: number) => prev + 1);
+    };
+
+    if (currentAudio && text[currentTTS]) {
+      currentAudio.addEventListener("ended", plusCurrentTTS);
+
+      const getVoice = async () => {
+        const postData = {
+          name: userInfo.name,
+          voiceType: userInfo.gender ? "nhajun" : "vdain",
+          script: text[currentTTS],
+        };
+
+        const response = await axiosRequest.requestAxios<ResData<Blob>>("post", "/v1/voice", postData);
+        const data = response.data;
+
+        const url = URL.createObjectURL(new Blob([data]));
+
+        currentAudio.src = url;
+        currentAudio.play().catch(e => console.log(e));
+      };
+
+      getVoice();
+
+      return () => {
+        currentAudio.removeEventListener("ended", plusCurrentTTS);
+      };
+    }
+
+    if (!text[currentTTS]) {
       setTimeout(() => {
-        setBackground(true);
-
-        setTimeout(() => {
-          navigate("/example/2");
-        }, 20000);
-      }, 20000);
-    }, 20000);
-  }, []);
+        navigate("/example/2");
+      });
+    }
+  }, [audioRef.current, currentTTS]);
 
   return (
     <S.Body>
+      <audio ref={audioRef} />
+
       <S.Content>
-        {background && (
+        {currentTTS === 2 && (
           <>
             <S.Image src="/assets/img/icon/click.svg" />
             <S.Div>
@@ -58,16 +93,7 @@ function Ex01() {
         </S.ImageBox>
       </S.Content>
 
-      <Bottom>
-        {background ? (
-          `이 마음이 ${name}와\n같은지 아닌지`
-        ) : (
-          <>
-            {!comment && `각 이야기 마다, ${name}가\n느낄 수 있는 다양한 마음이 있어.`}
-            {comment && "이야기가 끝난 후에는 내가\n이 마음에 대해 물어볼건데,"}
-          </>
-        )}
-      </Bottom>
+      <Bottom>{!text[currentTTS] ? text[text.length - 1] : text[currentTTS]}</Bottom>
     </S.Body>
   );
 }

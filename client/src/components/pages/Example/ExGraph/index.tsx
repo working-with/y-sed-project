@@ -1,9 +1,11 @@
 import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { userInfoAtom } from "../../../../recoil/atoms/user.atom";
 import getName from "../../../../utils/getName";
+import axiosRequest from "../../../../api";
+import { ResData } from "../../../../@types";
 
 import * as S from "./index.styled";
 
@@ -27,16 +29,66 @@ function ExGraph({ sad }: ExGraphProps) {
 
   const handleGraphClick = (index: number) => {
     setSelectedIndex(prevIndex => (prevIndex === index ? null : index));
+    setCurrentTTS((prev: number) => prev + 1);
   };
 
   const handleBlueBtnClick = () => {
     setBtnClick(true);
-
     if (sad) navigate("/example/finish");
   };
 
+  const [currentTTS, setCurrentTTS] = useState<number>(0);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  const text = [
+    `그리고 얼만큼 ${name} 마음과\n 같은지 알려줄래?`,
+    sad ? `와! 좋았어!\n다음으로 가볼까?` : `잘했어!\n이제 옆에 파란 버튼을 눌러보자.`,
+  ];
+
+  useEffect(() => {
+    const currentAudio = audioRef.current;
+
+    const plusCurrentTTS = () => {
+      // setCurrentTTS((prev: number) => prev + 1);
+    };
+
+    if (currentAudio && text[currentTTS]) {
+      currentAudio.addEventListener("ended", plusCurrentTTS);
+
+      const getVoice = async () => {
+        const postData = {
+          name: userInfo.name,
+          voiceType: userInfo.gender ? "nhajun" : "vdain",
+          script: text[currentTTS],
+        };
+
+        const response = await axiosRequest.requestAxios<ResData<Blob>>("post", "/v1/voice", postData);
+        const data = response.data;
+
+        const url = URL.createObjectURL(new Blob([data]));
+
+        currentAudio.src = url;
+        currentAudio.play().catch(e => console.log(e));
+      };
+
+      getVoice();
+
+      return () => {
+        currentAudio.removeEventListener("ended", plusCurrentTTS);
+      };
+    }
+
+    if (!text[currentTTS]) {
+      setTimeout(() => {
+        setBtnClick(true);
+      });
+    }
+  }, [audioRef.current, currentTTS]);
+
   return (
     <S.Body>
+      <audio ref={audioRef} />
+
       {!btnClick && (
         <>
           <S.Content>
@@ -44,11 +96,7 @@ function ExGraph({ sad }: ExGraphProps) {
           </S.Content>
 
           <Bottom button={true} color={selectedIndex !== null ? "bluePlay" : ""} onClick={handleBlueBtnClick}>
-            {selectedIndex !== null
-              ? sad
-                ? `와! 좋았어\n다음으로 가볼까?`
-                : `잘했어!\n이제 옆에 파란 버튼을 눌러보자.`
-              : `그리고 얼만큼 ${name} 마음과\n같은지 알려줄래?`}
+            {!text[currentTTS] ? text[text.length - 1] : text[currentTTS]}
           </Bottom>
         </>
       )}
