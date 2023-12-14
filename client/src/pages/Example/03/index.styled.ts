@@ -14,5 +14,5 @@ export const Content = styled.div`
 export const Image = styled.img`
   position: absolute;
   z-index: 2;
-  transform: translate(510%, 200%);
+  transform: translate(600%, 200%);
 `;
