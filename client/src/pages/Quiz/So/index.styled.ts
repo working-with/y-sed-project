@@ -13,5 +13,5 @@ export const Content = styled.div`
 `;
 
 export const Status = styled.div`
-  margin-bottom: 68px;
+  margin-bottom: 170px;
 `;

@@ -10,6 +10,11 @@ export const Body = styled.div`
   ${bodyContainer}
 `;
 
+export const Top = styled.div`
+  ${flexCenter}
+  padding-bottom: 100px;
+`;
+
 export const Content = styled.div<{ quiz?: boolean }>`
   ${flexCenter}
   ${height}
@@ -29,7 +34,7 @@ export const Qox = styled.div`
   width: 1401px;
   height: 870px;
   margin: 0 auto;
-  transform: translate(-0%, 5.9%);
+  transform: translate(-0%, 11.6%);
 
   > div {
     position: fixed;

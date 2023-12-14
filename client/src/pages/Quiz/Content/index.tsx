@@ -122,8 +122,6 @@ function Content() {
       ? [scripts.length && scripts[0].script, scripts.length && scripts[1].script, SQX] // 3. 3번째 질문이고 실험 문항이 9번일 경우
       : [scripts.length && scripts[0].script, SQX]; // 4. 2, 3번째 질문
 
-  console.log(text);
-
   useEffect(() => {
     const currentAudio = audioRef.current;
 
@@ -170,6 +168,10 @@ function Content() {
       <audio ref={audioRef} />
 
       <S.Content>
+        <S.Top>
+          <StatusBar status={status} />
+        </S.Top>
+
         <S.Qox>
           <div>
             <S.YesImg src="/assets/img/icon/blueO.svg" alt="O" onClick={handleOClick} yesBtn={yesBtn} />
@@ -177,8 +179,6 @@ function Content() {
           </div>
         </S.Qox>
 
-        {/* 11 -> 0 */}
-        <StatusBar status={status} />
         <img src={image} alt="storyImage" />
       </S.Content>
 
