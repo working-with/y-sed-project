@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
 import useCloseBtn from "../../hooks/useCloseBtn";
 import { userInfoAtom } from "../../recoil/atoms/user.atom";
 import getName from "../../utils/getName";
+import axiosRequest from "../../api";
+import { ResData } from "../../@types";
 
 import * as S from "./index.styled";
 
@@ -31,11 +33,58 @@ function Start() {
   const userInitials = name.slice(0, 2);
   const kidName = name.includes("이") ? `${userInitials}아` : `${userInitials}야`;
 
+  const [currentTTS, setCurrentTTS] = useState(0);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  const text = [`안녕 ${kidName}~!`];
+
+  useEffect(() => {
+    const currentAudio = audioRef.current;
+
+    const plusCurrentTTS = () => {
+      setCurrentTTS((prev: number) => prev + 1);
+    };
+
+    if (currentAudio && text[currentTTS] && click) {
+      currentAudio.addEventListener("ended", plusCurrentTTS);
+
+      const getVoice = async () => {
+        const postData = {
+          name: userInfo.name,
+          voiceType: userInfo.gender === 1 ? "nhajun" : "vdain",
+          script: text[currentTTS],
+        };
+
+        const response = await axiosRequest.requestAxios<ResData<Blob>>("post", "/v1/voice", postData);
+        const data = response.data;
+
+        const url = URL.createObjectURL(new Blob([data]));
+
+        currentAudio.src = url;
+        currentAudio.play().catch(e => console.log(e));
+      };
+
+      getVoice();
+
+      return () => {
+        currentAudio.removeEventListener("ended", plusCurrentTTS);
+      };
+    }
+
+    if (!text[currentTTS]) {
+      setTimeout(() => {
+        // navigate("/example/1");
+      }, 3000);
+    }
+  }, [audioRef.current, currentTTS, click]);
+
   return (
     <S.Body>
+      <audio ref={audioRef} />
+
       <S.TitleBox>
         {!click && <img src="/assets/img/icon/smileIcon.svg" alt="smile_icon" />}
-        {click && <span>안녕 {kidName}~!</span>}
+        {click && <span>{!text[currentTTS] ? text[text.length - 1] : text[currentTTS]}</span>}
       </S.TitleBox>
 
       <S.ButtonBox>
