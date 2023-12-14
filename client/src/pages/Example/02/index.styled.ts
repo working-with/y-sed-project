@@ -3,10 +3,7 @@ import { bodyContainer, flexCenter, height } from "../../../style/common";
 
 interface ImageProps {
   click?: boolean;
-  first?: boolean;
-  second?: boolean;
-  third?: boolean;
-  fourth?: boolean;
+  changeNum: number;
 }
 
 export const Body = styled.div`
@@ -28,24 +25,24 @@ export const Image = styled.img<ImageProps>`
   position: absolute;
   z-index: 2;
 
-  ${({ first, click }) =>
-    first &&
+  ${({ changeNum, click }) =>
+    changeNum === 1 &&
     click &&
     css`
       transform: translate(-380%, 90%);
     `}
-  ${({ second }) =>
-    second &&
+  ${({ changeNum }) =>
+    changeNum === 2 &&
     css`
       transform: translate(-200%, 90%);
     `}
-	${({ third }) =>
-    third &&
+	${({ changeNum }) =>
+    changeNum === 3 &&
     css`
       transform: translate(20%, 90%);
     `}
-	${({ fourth }) =>
-    fourth &&
+	${({ changeNum }) =>
+    changeNum === 4 &&
     css`
       transform: translate(300%, 90%);
     `}
@@ -68,8 +65,8 @@ export const First = styled(GraphItem)`
   width: 250px;
   height: 250px;
 
-  ${({ first }) =>
-    first &&
+  ${({ changeNum }) =>
+    (changeNum === 1 || changeNum === 0) &&
     css`
       background: ${({ theme }) => theme.PALETTE.orange[400]};
     `}
@@ -79,8 +76,8 @@ export const Second = styled(GraphItem)`
   width: 325px;
   height: 325px;
 
-  ${({ second }) =>
-    second &&
+  ${({ changeNum }) =>
+    changeNum === 2 &&
     css`
       background: ${({ theme }) => theme.PALETTE.orange[400]};
     `}
@@ -90,8 +87,8 @@ export const Third = styled(GraphItem)`
   width: 426px;
   height: 425px;
 
-  ${({ third }) =>
-    third &&
+  ${({ changeNum }) =>
+    changeNum === 3 &&
     css`
       background: ${({ theme }) => theme.PALETTE.orange[400]};
     `}
@@ -101,8 +98,8 @@ export const Fourth = styled(GraphItem)`
   width: 550px;
   height: 550px;
 
-  ${({ fourth }) =>
-    fourth &&
+  ${({ changeNum }) =>
+    changeNum === 4 &&
     css`
       background: ${({ theme }) => theme.PALETTE.orange[400]};
     `}
