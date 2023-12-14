@@ -1,4 +1,4 @@
-const makeHeaders = () => {
+const getHeader = () => {
   const header = [
     { label: "code", key: "code" },
     { label: "name", key: "name" },
@@ -29,4 +29,4 @@ const makeHeaders = () => {
   return header;
 };
 
-export default makeHeaders;
+export default getHeader;
