@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { CSVLink } from "react-csv";
@@ -15,6 +15,27 @@ import getHeaders from "../../utils/getHeaders";
 import * as S from "./index.styled";
 
 import Button from "../../components/common/Button";
+
+interface Excel {
+  data: Data[];
+}
+
+interface Data {
+  id: string;
+  createdAt: Date;
+  name: string;
+  code: string;
+  gender: number;
+  survey: [
+    {
+      [key: string]: DefaultData;
+    },
+  ];
+}
+
+interface DefaultData {
+  [key: string]: number | null | string;
+}
 
 function Home() {
   useCloseBtn();
@@ -56,17 +77,45 @@ function Home() {
   };
 
   // excel-download
-  const [state, setState] = useState<KidInformation[]>([]);
-
-  const data = [{ name: "조아연", code: "A1234", gender: 0 }];
+  const [state, setState] = useState<DefaultData[]>([]);
 
   const handleExcelDownClick = async () => {
     if (window.confirm(MESSAGE.EXCEL_DOWN)) {
-      const response = await axiosRequest.requestAxios<ResData<KidInformation[]>>("get", "/v1/kid");
+      const response = await axiosRequest.requestAxios<ResData<Excel>>("get", "/v1/kid");
+      const data = response.data.data;
 
-      setState(response.data);
+      const sampleData: DefaultData[] = [];
+
+      // data 안에 객체 안에 survey 라는 배열 존재 1-1: {scale: , boolean}
+      for (let i = 0; i < data.length; i++) {
+        const { name, code, gender, survey } = data[i];
+        const currentData: DefaultData = { name, code, gender };
+
+        for (let j = 0; j < survey?.length; j++) {
+          const [qNum, answers] = Object.entries(survey[j])[0];
+          const { scaleAnswer, booleanAnswer } = answers;
+
+          const [ex, ox] = qNum.split("-");
+
+          currentData[`${ex}-${ox}-booleanAnswer`] = booleanAnswer;
+          currentData[`${ex}-${ox}-scaleAnswer`] = scaleAnswer;
+        }
+
+        sampleData.push(currentData);
+      }
+
+      setState(sampleData);
     }
   };
+
+  const csvLink = useRef<CSVLink & HTMLAnchorElement & { link: HTMLAnchorElement }>(null);
+
+  useEffect(() => {
+    if (state.length > 0) {
+      csvLink.current?.link.click();
+      setState([]);
+    }
+  }, [state]);
 
   return (
     <S.Body>
@@ -94,10 +143,9 @@ function Home() {
 
         <S.ButtonBox>
           <Button variant="green" onClick={handleExcelDownClick}>
-            <CSVLink data={data} headers={getHeaders} filename="아동 실험 전체 코드">
-              엑셀 다운
-            </CSVLink>
+            엑셀 다운
           </Button>
+          <CSVLink ref={csvLink} data={state} headers={getHeaders()} filename="아동 실험 전체 코드" />
 
           <Button variant="blue" onClick={handleStartClick}>
             시작하기
