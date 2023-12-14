@@ -17,3 +17,14 @@ export const Top = styled.div`
 export const Middle = styled.div`
   ${flexCenter}
 `;
+
+export const ImageBox = styled.div`
+  position: absolute;
+
+  > img {
+    width: 600px;
+    height: 500px;
+    position: fixed;
+    transform: translate(50%, -40%);
+  }
+`;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { userInfoAtom } from "../../recoil/atoms/user.atom";
@@ -44,9 +44,19 @@ function Finish() {
     if (quizAnswer.length !== 0) {
       getAnswer();
     }
+  }, []);
 
-    setTimeout(() => {
-      setFinish(false);
+  // tts
+  const [currentTTS, setCurrentTTS] = useState(0);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  const text = [FIN1, FIN2];
+
+  useEffect(() => {
+    const currentAudio = audioRef.current;
+
+    const plusCurrentTTS = () => {
+      setCurrentTTS(prev => prev + 1);
 
       setUserReset({
         kidId: "",
@@ -57,13 +67,41 @@ function Finish() {
 
       setQuizAnswer(() => []);
       setLastImage("");
-    }, 10000);
-  }, []);
+    };
+
+    if (currentAudio && text[currentTTS]) {
+      currentAudio.addEventListener("ended", plusCurrentTTS);
+
+      const getVoice = async () => {
+        const postData = {
+          name: userInfo.name,
+          voiceType: userInfo.gender ? "nhajun" : "vdain",
+          script: text[currentTTS],
+        };
+
+        const response = await axiosRequest.requestAxios<ResData<Blob>>("post", "/v1/voice", postData);
+        const data = response.data;
+
+        const url = URL.createObjectURL(new Blob([data]));
+
+        currentAudio.src = url;
+        currentAudio.play().catch(e => console.log(e));
+      };
+
+      getVoice();
+
+      return () => {
+        currentAudio.removeEventListener("ended", plusCurrentTTS);
+      };
+    }
+  }, [audioRef.current, currentTTS, finish]);
 
   return (
     <S.Body>
+      <audio ref={audioRef} />
+
       <S.Content>
-        {finish ? (
+        {currentTTS === 0 ? (
           <>
             <StatusBar status={100} />
             <img src="/assets/img/icon/happyIcon.svg" alt="happy_icon" />
@@ -73,7 +111,7 @@ function Finish() {
         )}
       </S.Content>
 
-      <Bottom top={true}>{finish ? FIN1 : FIN2}</Bottom>
+      <Bottom top={true}>{!text[currentTTS] ? text[text.length - 1] : text[currentTTS]}</Bottom>
     </S.Body>
   );
 }

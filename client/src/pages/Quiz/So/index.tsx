@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -6,6 +6,8 @@ import { userInfoAtom } from "../../../recoil/atoms/user.atom";
 import common from "../../../utils/common";
 import getName from "../../../utils/getName";
 import { quizAnswerAtom } from "../../../recoil/atoms/quiz.atom";
+import axiosRequest from "../../../api";
+import { ResData } from "../../../@types";
 
 import * as S from "./index.styled";
 
@@ -58,8 +60,50 @@ function So() {
     setSelectedIndex(prevIndex => (prevIndex === index ? null : index));
   };
 
+  // tts
+  const [currentTTS, setCurrentTTS] = useState(0);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  const text = [SO];
+
+  useEffect(() => {
+    const currentAudio = audioRef.current;
+
+    const plusCurrentTTS = () => {
+      setCurrentTTS((prev: number) => prev + 1);
+    };
+
+    if (currentAudio && text[currentTTS]) {
+      currentAudio.addEventListener("ended", plusCurrentTTS);
+
+      const getVoice = async () => {
+        const postData = {
+          name: userInfo.name,
+          voiceType: userInfo.gender ? "nhajun" : "vdain",
+          script: text[currentTTS],
+        };
+
+        const response = await axiosRequest.requestAxios<ResData<Blob>>("post", "/v1/voice", postData);
+        const data = response.data;
+
+        const url = URL.createObjectURL(new Blob([data]));
+
+        currentAudio.src = url;
+        currentAudio.play().catch(e => console.log(e));
+      };
+
+      getVoice();
+
+      return () => {
+        currentAudio.removeEventListener("ended", plusCurrentTTS);
+      };
+    }
+  }, [audioRef.current, currentTTS]);
+
   return (
     <S.Body>
+      <audio ref={audioRef} />
+
       <S.Content>
         <S.Status>
           <StatusBar status={status} />
