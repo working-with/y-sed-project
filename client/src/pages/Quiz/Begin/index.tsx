@@ -54,7 +54,7 @@ function Begin() {
       const getVoice = async () => {
         const postData = {
           name: userInfo.name,
-          voiceType: userInfo.gender ? "nhajun" : "vdain",
+          voiceType: "ngoeun",
           script: text[currentTTS],
         };
 
