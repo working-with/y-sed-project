@@ -56,6 +56,7 @@ export const Content = styled.div`
     font-weight: 700;
     line-height: 104px; /* 130% */
     letter-spacing: 0.4px;
+    white-space: "pre-wrap";
   }
 `;
 
