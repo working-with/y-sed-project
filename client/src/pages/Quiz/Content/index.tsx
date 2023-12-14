@@ -37,7 +37,7 @@ function Content() {
   const [status, setStatus] = useState<number>(11);
 
   // 백에서 받아오는 스크립트 받는 부분
-  const [scripts, setScripts] = useState<Question[]>();
+  const [scripts, setScripts] = useState<Question[]>([]);
 
   useEffect(() => {
     const getContent = async () => {
@@ -115,12 +115,14 @@ function Content() {
 
   const text =
     Number(oxId) === 0 && (Number(experimentId) === 2 || Number(experimentId) === 8)
-      ? [QOX, scripts && scripts[0].script, scripts && scripts[1].script, SQX] // 1. 1번째 질문이고 실험 문항이 2, 8번인 경우
+      ? [QOX, scripts.length && scripts[0].script, scripts.length && scripts[1].script, SQX] // 1. 1번째 질문이고 실험 문항이 2, 8번인 경우
       : Number(oxId) === 0
-      ? [QOX, scripts && scripts[0].script, SQX] // 2. 1번째 질문이고 2, 8이 아닌 경우
+      ? [QOX, scripts.length && scripts[0].script, SQX] // 2. 1번째 질문이고 2, 8이 아닌 경우
       : Number(oxId) === 2 && Number(experimentId) === 9
-      ? [scripts && scripts[0].script, scripts && scripts[1].script, SQX] // 3. 3번째 질문이고 실험 문항이 9번일 경우
-      : [scripts && scripts[0].script, SQX]; // 4. 2, 3번째 질문
+      ? [scripts.length && scripts[0].script, scripts.length && scripts[1].script, SQX] // 3. 3번째 질문이고 실험 문항이 9번일 경우
+      : [scripts.length && scripts[0].script, SQX]; // 4. 2, 3번째 질문
+
+  console.log(text);
 
   useEffect(() => {
     const currentAudio = audioRef.current;
@@ -134,7 +136,7 @@ function Content() {
       }
     };
 
-    if (currentAudio && text[currentTTS]) {
+    if (currentAudio && text[currentTTS] && scripts.length) {
       currentAudio.addEventListener("ended", plusCurrentTTS);
 
       const getVoice = async () => {
@@ -155,15 +157,13 @@ function Content() {
 
       getVoice();
 
-      if (text.length - 1 === currentTTS) {
-        setSqx(true);
-      }
+      if (text.length - 1 === currentTTS) setSqx(true);
 
       return () => {
         currentAudio.removeEventListener("ended", plusCurrentTTS);
       };
     }
-  }, [audioRef.current, currentTTS]);
+  }, [audioRef.current, currentTTS, scripts]);
 
   return (
     <S.Body>
