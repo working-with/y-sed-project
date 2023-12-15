@@ -1,5 +1,9 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { bodyContainer, flexCenter, flexAlignCenter } from "../../style/common";
+
+interface ButtonProps {
+  clicked?: boolean;
+}
 
 export const Body = styled.div`
   ${bodyContainer}
@@ -14,6 +18,10 @@ export const Content = styled.div`
 
 export const Wrapper = styled.div`
   ${flexAlignCenter}
+
+  & button {
+    margin: 0 20px;
+  }
 `;
 
 export const TitleBox = styled(Wrapper)`
@@ -38,6 +46,30 @@ export const Input = styled.input`
     outline: none;
     text-align: center;
   }
+`;
+
+export const Button = styled.button<ButtonProps>`
+  width: 410px;
+  height: 170px;
+  border-radius: 70px;
+  font-size: 75px;
+  background-color: ${({ theme }) => theme.PALETTE.blue[200]};
+  color: ${({ theme }) => theme.PALETTE.white};
+
+  ${({ clicked }) =>
+    clicked &&
+    css`
+      background-color: ${({ theme }) => theme.PALETTE.red[200]};
+    `}
+`;
+
+export const FirstInput = styled(Input)`
+  width: 380px;
+  margin-right: 100px;
+`;
+
+export const TwoInput = styled(Input)`
+  width: 380px;
 `;
 
 export const ButtonBox = styled.div`
