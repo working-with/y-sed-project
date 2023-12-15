@@ -22,7 +22,7 @@ function So() {
   const { experimentId, oxId } = params;
 
   const userInfo = useRecoilValue(userInfoAtom);
-  const name = getName(userInfo.name);
+  const name = getName(userInfo.lastName);
 
   const { SO } = common(name);
 
@@ -78,7 +78,7 @@ function So() {
 
       const getVoice = async () => {
         const postData = {
-          name: userInfo.name,
+          name: userInfo.lastName,
           voiceType: userInfo.gender ? "nhajun" : "vdain",
           script: text[currentTTS],
         };

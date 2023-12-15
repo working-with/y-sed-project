@@ -25,7 +25,7 @@ function Content() {
 
   // 아동 정보에서 이름 얻기
   const userInfo = useRecoilValue(userInfoAtom);
-  const name = getName(userInfo.name);
+  const name = getName(userInfo.lastName);
 
   // 백에서 받아오는 스크립트 제외 부분
   const { QOX, SQX } = common(name);
@@ -139,7 +139,7 @@ function Content() {
 
       const getVoice = async () => {
         const postData = {
-          name: userInfo.name,
+          name: userInfo.lastName,
           voiceType: userInfo.gender ? "nhajun" : "vdain",
           script: text[currentTTS],
         };

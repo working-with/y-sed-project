@@ -20,7 +20,7 @@ function Narration() {
   const { experimentId } = params;
 
   const userInfo = useRecoilValue(userInfoAtom);
-  const name = getName(userInfo.name);
+  const name = getName(userInfo.lastName);
 
   const [image, setImage] = useState<Image[]>();
   const [lastImage, setLastImage] = useRecoilState(lastImageAtom);
@@ -74,7 +74,7 @@ function Narration() {
 
       const getVoice = async () => {
         const postData = {
-          name: userInfo.name,
+          name: userInfo.lastName,
           voiceType: "ngoeun",
           script: text[currentTTS],
         };
