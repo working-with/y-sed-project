@@ -49,7 +49,7 @@ function Next() {
 
       const getVoice = async () => {
         const postData = {
-          name: userInfo.name,
+          name: userInfo.lastName,
           voiceType: userInfo.gender ? "nhajun" : "vdain",
           script: text[currentTTS],
         };
@@ -59,8 +59,21 @@ function Next() {
 
         const url = URL.createObjectURL(new Blob([data]));
 
-        currentAudio.src = url;
-        currentAudio.play().catch(e => console.log(e));
+        if (numberOxId === 2) {
+          const audioUrl = experiment % 2 ? "/assets/mp3/MP_tada_.mp3" : "/assets/mp3/MP_Tada_Fanfare_A.mp3";
+
+          const audio = new Audio(audioUrl);
+
+          audio.play().catch(e => console.log(e));
+
+          audio.addEventListener("ended", () => {
+            currentAudio.src = url;
+            currentAudio.play().catch(e => console.log(e));
+          });
+        } else {
+          currentAudio.src = url;
+          currentAudio.play().catch(e => console.log(e));
+        }
       };
 
       getVoice();

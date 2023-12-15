@@ -32,7 +32,7 @@ function Ex03() {
 
       const getVoice = async () => {
         const postData = {
-          name: userInfo.name,
+          name: userInfo.lastName,
           voiceType: userInfo.gender ? "nhajun" : "vdain",
           script: text[currentTTS],
         };

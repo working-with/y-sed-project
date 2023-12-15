@@ -14,7 +14,7 @@ import Bottom from "../../../components/common/Bottom";
 // gui04 ~ guiShp04
 function Ex02() {
   const userInfo = useRecoilValue(userInfoAtom);
-  const name = getName(userInfo.name);
+  const name = getName(userInfo.lastName);
 
   const navigate = useNavigate();
 
@@ -43,7 +43,7 @@ function Ex02() {
 
       const getVoice = async () => {
         const postData = {
-          name: userInfo.name,
+          name: userInfo.lastName,
           voiceType: userInfo.gender ? "nhajun" : "vdain",
           script: text[currentTTS],
         };

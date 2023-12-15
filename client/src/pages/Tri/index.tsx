@@ -18,7 +18,7 @@ function Tri() {
   const navigate = useNavigate();
 
   const userInfo = useRecoilValue(userInfoAtom);
-  const name = getName(userInfo.name);
+  const name = getName(userInfo.lastName);
 
   // 1) 연수리 - 남자 아이 - 하준 (남성, 아동) BOY = 'nhajun'
   // 2) 연수리 - 여자 아이 - 다인 (여성, 아동) GIRL = 'vdain'
@@ -41,7 +41,7 @@ function Tri() {
 
       const getVoice = async () => {
         const postData = {
-          name: userInfo.name,
+          name: userInfo.lastName,
           voiceType: userInfo.gender ? "nhajun" : "vdain",
           script: text[currentTTS],
         };

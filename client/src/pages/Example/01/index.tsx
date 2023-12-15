@@ -17,7 +17,7 @@ function Ex01() {
   const navigate = useNavigate();
 
   const userInfo = useRecoilValue(userInfoAtom);
-  const name = getName(userInfo.name);
+  const name = getName(userInfo.lastName);
 
   const [currentTTS, setCurrentTTS] = useState<number>(0);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -40,7 +40,7 @@ function Ex01() {
 
       const getVoice = async () => {
         const postData = {
-          name: userInfo.name,
+          name: userInfo.lastName,
           voiceType: userInfo.gender ? "nhajun" : "vdain",
           script: text[currentTTS],
         };

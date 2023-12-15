@@ -28,7 +28,7 @@ function Start() {
   };
 
   const userInfo = useRecoilValue(userInfoAtom);
-  const name = getName(userInfo.name);
+  const name = getName(userInfo.lastName);
 
   const userInitials = name.slice(0, 2);
   const kidName = name.includes("이") ? `${userInitials}아` : `${userInitials}야`;
@@ -50,7 +50,7 @@ function Start() {
 
       const getVoice = async () => {
         const postData = {
-          name: userInfo.name,
+          name: userInfo.lastName,
           voiceType: userInfo.gender === 1 ? "nhajun" : "vdain",
           script: text[currentTTS],
         };
