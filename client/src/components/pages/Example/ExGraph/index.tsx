@@ -22,7 +22,7 @@ function ExGraph({ sad }: ExGraphProps) {
   const navigate = useNavigate();
 
   const userInfo = useRecoilValue(userInfoAtom);
-  const name = getName(userInfo.name);
+  const name = getName(userInfo.lastName);
 
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [btnClick, setBtnClick] = useState<boolean>(false);
@@ -57,7 +57,7 @@ function ExGraph({ sad }: ExGraphProps) {
 
       const getVoice = async () => {
         const postData = {
-          name: userInfo.name,
+          name: userInfo.lastName,
           voiceType: userInfo.gender ? "nhajun" : "vdain",
           script: text[currentTTS],
         };
