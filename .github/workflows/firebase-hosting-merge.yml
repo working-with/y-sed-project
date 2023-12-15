@@ -13,8 +13,8 @@ jobs:
       - uses: actions/checkout@v3
       - run: |
           cd client && \
-          npm clear cache && \
-          npm install & npm run build
+          npm install & npm run build \
+          npm cache clean
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
