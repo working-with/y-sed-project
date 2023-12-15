@@ -90,7 +90,7 @@ function Content() {
       const newQuiz = {
         [`${experimentId}-${Number(oxId) + 1}`]: {
           booleanAnswer: 0,
-          scaleAnswer: null,
+          scaleAnswer: 0,
         },
       };
 
