@@ -1,0 +1,26 @@
+services:
+  api:
+    container_name: nest-server
+    image: y-sed-web:latest
+    platform: linux/amd64
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: prod
+    # Mount host directory to docker container to support watch mode
+    volumes:
+      - .:/user/src/app
+      # This ensures that the NestJS container manages the node_modules folder
+      # rather than synchronizes it with the host machine
+      - /user/src/app/node_modules
+    env_file:
+      - .env
+    secrets:
+      - web_secret
+    ports:
+      - 5000:5000
+
+secrets:
+  web_secret:
+    file: ./.env
