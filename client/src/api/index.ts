@@ -5,7 +5,7 @@ const allowMethod: string[] = ["get", "post", "put", "patch", "delete"];
 
 // Axios 인스턴스 생성
 const instance = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: "https://y-sed-web.azurewebsites.net/api",
   timeout: 5000,
   // responseType: "blob",
 });
