@@ -9,10 +9,8 @@ export const Content = styled.div<{ quiz?: boolean }>`
   ${flexCenter}
   ${height}
 	flex-direction: column;
-  gap: 60px;
 
   > img:last-child {
-    width: 1401px;
-    height: 862px;
+    width: 40rem;
   }
 `;

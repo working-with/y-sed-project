@@ -8,10 +8,9 @@ export const Body = styled.div`
 export const ImgBox = styled.div`
   ${height}
   ${flexCenter}
-	gap: 82px;
+	gap: 2rem;
 
   > img {
-    width: 910px;
-    height: 569px;
+    width: 32rem;
   }
 `;

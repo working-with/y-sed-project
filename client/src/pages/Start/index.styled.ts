@@ -4,19 +4,23 @@ import { bodyContainer, flexCenter } from "../../style/common";
 export const Body = styled.div`
   ${bodyContainer}
   ${flexCenter}
-    flex-direction: column;
-  gap: 82px;
+  flex-direction: column;
+  gap: 3rem;
 `;
 
 export const TitleBox = styled.div`
-  height: 654px;
+  height: 16rem;
   ${flexCenter}
 
   > span {
-    font-size: 128px;
+    font-size: 5rem;
     font-weight: 700;
     line-height: 20px; /* 15.625% */
     letter-spacing: 0.4px;
+  }
+
+  > img {
+    width: 25rem;
   }
 `;
 

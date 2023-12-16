@@ -27,35 +27,35 @@ export const variantCSS = {
 
 export const shapeCSS = {
   red: css`
-    border: 15px solid ${({ theme }) => theme.PALETTE.red[400]};
+    border: 10px solid ${({ theme }) => theme.PALETTE.red[400]};
     color: ${({ theme }) => theme.PALETTE.red[400]};
     background-color: ${({ theme }) => theme.PALETTE.white};
   `,
   orange: css`
-    border: 15px solid ${({ theme }) => theme.PALETTE.orange[400]};
+    border: 10px solid ${({ theme }) => theme.PALETTE.orange[400]};
     color: ${({ theme }) => theme.PALETTE.orange[400]};
     background-color: ${({ theme }) => theme.PALETTE.white};
   `,
   green: css`
-    border: 15px solid ${({ theme }) => theme.PALETTE.green[400]};
+    border: 10px solid ${({ theme }) => theme.PALETTE.green[400]};
     color: ${({ theme }) => theme.PALETTE.green[400]};
     background-color: ${({ theme }) => theme.PALETTE.white};
   `,
   blue: css`
-    border: 15px solid ${({ theme }) => theme.PALETTE.blue[400]};
+    border: 10px solid ${({ theme }) => theme.PALETTE.blue[400]};
     color: ${({ theme }) => theme.PALETTE.blue[400]};
     background-color: ${({ theme }) => theme.PALETTE.white};
   `,
 };
 
 export const Button = styled.button<ButtonProps>`
-  width: 543px;
-  height: 225px;
-  font-size: 75px;
-  border-radius: 70px;
+  width: 12rem;
+  height: 6rem;
+  font-size: 2rem;
+  border-radius: 2rem;
 
   font-weight: 800;
-  letter-spacing: 3.9px;
+  /* letter-spacing: 3.9px; */
 
   ${({ variant }) => variant && variantCSS[variant]}
   ${({ shape }) => shape && shapeCSS[shape]};

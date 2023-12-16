@@ -10,7 +10,7 @@ export const Body = styled.div`
 
 export const Title = styled.span`
   color: ${({ theme }) => theme.PALETTE.black};
-  font-size: 85px;
+  font-size: 4rem;
   font-weight: 800;
   line-height: 20px; /* 23.529% */
   letter-spacing: 3.9px;
@@ -18,5 +18,5 @@ export const Title = styled.span`
 
 export const ButtonBox = styled.div`
   ${flexCenter}
-  gap: 92px;
+  gap: 4rem;
 `;
