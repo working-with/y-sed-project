@@ -2,8 +2,8 @@ import { css } from "styled-components";
 
 export const bodyContainer = css`
   margin: 0 auto;
-  width: 100vw;
-  height: 100vh;
+  width: 2388px;
+  height: 1668px;
 `;
 
 export const height = css`

@@ -42,6 +42,8 @@ const GlobalStyles = createGlobalStyle`
   }
     
   body {
+    width: 100vw;
+    height: 100vh;
     font-family: 'NanumSquareNeoOTF-Rg';
     color: ${({ theme }) => theme.PALETTE.black};
   }
@@ -63,6 +65,10 @@ const GlobalStyles = createGlobalStyle`
   ::-webkit-scrollbar {
     display: none;
   }
+
+  :root {
+    --vh: 100%;
+   }
 `;
 
 export default GlobalStyles;
