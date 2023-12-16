@@ -9,9 +9,9 @@ export const Content = styled.div`
   ${height}
   ${flexCenter}
   flex-direction: column;
-  gap: 300px;
+  /* gap: 300px; */
 `;
 
 export const Status = styled.div`
-  margin-bottom: 170px;
+  margin-bottom: 10.625rem;
 `;

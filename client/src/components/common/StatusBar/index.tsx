@@ -1,3 +1,5 @@
+import * as S from "./index.styled";
+
 interface StatusProps {
   status: number;
 }
@@ -18,7 +20,7 @@ function StatusBar({ status }: StatusProps) {
   // status에 해당하는 이미지 URL을 가져오기
   const imageUrl = percentage[status] || "/assets/img/icon/default.svg";
 
-  return <img src={imageUrl} alt="statusBar" />;
+  return <S.Image src={imageUrl} alt="statusBar" />;
 }
 
 export default StatusBar;

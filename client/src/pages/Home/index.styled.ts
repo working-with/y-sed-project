@@ -13,7 +13,7 @@ export const Body = styled.div`
 export const Content = styled.div`
   ${flexCenter}
   flex-direction: column;
-  gap: 145px;
+  gap: 4rem;
 `;
 
 export const Wrapper = styled.div`
@@ -25,21 +25,21 @@ export const Wrapper = styled.div`
 `;
 
 export const TitleBox = styled(Wrapper)`
-  margin-right: 75px;
-  width: 483px;
-  height: 222px;
+  margin-right: 4rem;
+  width: 14rem;
+  height: 6rem;
   ${flexCenter}
 
   > span {
-    font-size: 119px;
+    font-size: 3rem;
   }
 `;
 
 export const Input = styled.input`
-  width: 860px;
-  font-size: 120px;
+  width: 22rem;
+  font-size: 3rem;
   border: none;
-  border-bottom: 4px solid ${({ theme }) => theme.PALETTE.black};
+  border-bottom: 2px solid ${({ theme }) => theme.PALETTE.black};
   text-align: center;
 
   &:focus {
@@ -49,10 +49,10 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button<ButtonProps>`
-  width: 410px;
-  height: 170px;
-  border-radius: 70px;
-  font-size: 75px;
+  width: 10rem;
+  height: 5rem;
+  border-radius: 1.5rem;
+  font-size: 2.5rem;
   background-color: ${({ theme }) => theme.PALETTE.blue[200]};
   color: ${({ theme }) => theme.PALETTE.white};
 
@@ -64,17 +64,17 @@ export const Button = styled.button<ButtonProps>`
 `;
 
 export const FirstInput = styled(Input)`
-  width: 380px;
-  margin-right: 100px;
+  width: 10rem;
+  margin-right: 2rem;
 `;
 
 export const TwoInput = styled(Input)`
-  width: 380px;
+  width: 10rem;
 `;
 
 export const ButtonBox = styled.div`
   ${flexCenter}
-  gap: 200px;
+  gap: 6rem;
 
   & a {
     color: ${({ theme }) => theme.PALETTE.white};

@@ -4,9 +4,9 @@ import { BottomProps } from ".";
 import { flexAlignCenter, flexCenter } from "../../../style/common";
 
 export const Body = styled.div<BottomProps>`
-  height: 430px;
+  height: 16rem;
   ${flexAlignCenter}
-  gap: 100px;
+  gap: 3rem;
   ${({ top }) =>
     top &&
     css`
@@ -19,29 +19,27 @@ export const Body = styled.div<BottomProps>`
       justify-content: space-between;
     `}
 
-	padding: 45px 79px;
+  padding: 2rem 3rem;
   background-color: ${({ theme }) => theme.PALETTE.blue[100]};
 `;
 
 export const Image = styled.img`
-  width: 363.022px;
-  height: 249.695px;
+  width: 12rem;
 `;
 
 export const Div = styled.div`
-  width: 360px;
-  height: 75px;
-
-  border-radius: 16px;
-  border: 7px solid ${({ theme }) => theme.PALETTE.black};
+  width: 12rem;
+  height: 2.5rem;
+  border-radius: 10px;
+  border: 2px solid ${({ theme }) => theme.PALETTE.black};
   background-color: ${({ theme }) => theme.PALETTE.white};
-
+  margin-top: 1rem;
   ${flexCenter}
 
   > span {
-    font-size: 40px;
+    font-size: 1.5rem;
     font-weight: 900;
-    line-height: 104px; /* 260% */
+    line-height: 2rem; /* 260% */
     letter-spacing: 0.4px;
   }
 `;
@@ -49,17 +47,21 @@ export const Div = styled.div`
 export const Content = styled.div`
   ${flexCenter}
   text-align: center;
-  width: 1400px;
+  width: 100%;
 
   > pre {
-    font-size: 80px;
+    font-size: 2.7rem;
     font-weight: 700;
-    line-height: 104px; /* 130% */
-    letter-spacing: 0.4px;
+    line-height: 3.5rem;
+    letter-spacing: 0.1rem;
     white-space: "pre-wrap";
   }
 `;
 
 export const Button = styled.div`
   cursor: pointer;
+
+  > img {
+    width: 7rem;
+  }
 `;

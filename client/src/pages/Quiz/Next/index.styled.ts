@@ -4,11 +4,11 @@ import { bodyContainer, flexCenter, height } from "../../../style/common";
 const fadeOut = keyframes`
   0% {
     opacity: 1;
-    transform:translate(50%, -40%) scale(1); /* 초기 크기 */
+    transform:translate(90%, -40%) scale(1); /* 초기 크기 */
   }
   100% {
     opacity: 0;
-    transform:translate(50%, -40%) scale(1.4); /* 크기를 커지게 설정 (원하는 크기로 수정) */
+    transform:translate(90%, -40%) scale(1.4); /* 크기를 커지게 설정 (원하는 크기로 수정) */
   }
 `;
 
@@ -22,7 +22,7 @@ export const Content = styled.div`
 
 export const Top = styled.div`
   ${flexCenter}
-  padding: 90px 0 380px 0;
+  padding: 2.65rem 0 10rem 0;
 `;
 
 export const Middle = styled.div`
@@ -33,10 +33,9 @@ export const ImageBox = styled.div`
   position: absolute;
 
   > img {
-    width: 600px;
-    height: 500px;
+    width: 20rem;
     position: fixed;
-    transform: translate(50%, -40%);
+    transform: translate(90%, -40%);
     animation: ${fadeOut} 2s 1 ease alternate;
 
     opacity: 0; /* 초기에 투명하게 설정 */

@@ -18,33 +18,34 @@ export const Content = styled.div`
 export const Div = styled.div`
   display: flex;
   align-items: flex-end;
-  gap: 35px;
+  gap: 1.5rem;
 `;
 
 export const Image = styled.img<ImageProps>`
   position: absolute;
   z-index: 2;
+  width: 6rem;
 
   ${({ changeNum, click }) =>
     changeNum === 1 &&
     click &&
     css`
-      transform: translate(-380%, 90%);
+      transform: translate(-430%, 90%);
     `}
   ${({ changeNum }) =>
     changeNum === 2 &&
     css`
-      transform: translate(-200%, 90%);
+      transform: translate(-220%, 90%);
     `}
 	${({ changeNum }) =>
     changeNum === 3 &&
     css`
-      transform: translate(20%, 90%);
+      transform: translate(45%, 90%);
     `}
 	${({ changeNum }) =>
     changeNum === 4 &&
     css`
-      transform: translate(300%, 90%);
+      transform: translate(350%, 90%);
     `}
 `;
 
@@ -62,8 +63,8 @@ export const GraphItem = styled.div<ImageProps>`
 `;
 
 export const First = styled(GraphItem)`
-  width: 250px;
-  height: 250px;
+  width: 9rem;
+  height: 9rem;
 
   ${({ changeNum }) =>
     (changeNum === 1 || changeNum === 0) &&
@@ -73,8 +74,8 @@ export const First = styled(GraphItem)`
 `;
 
 export const Second = styled(GraphItem)`
-  width: 325px;
-  height: 325px;
+  width: 12rem;
+  height: 12rem;
 
   ${({ changeNum }) =>
     changeNum === 2 &&
@@ -84,8 +85,8 @@ export const Second = styled(GraphItem)`
 `;
 
 export const Third = styled(GraphItem)`
-  width: 426px;
-  height: 425px;
+  width: 15rem;
+  height: 15rem;
 
   ${({ changeNum }) =>
     changeNum === 3 &&
@@ -95,8 +96,8 @@ export const Third = styled(GraphItem)`
 `;
 
 export const Fourth = styled(GraphItem)`
-  width: 550px;
-  height: 550px;
+  width: 18rem;
+  height: 18rem;
 
   ${({ changeNum }) =>
     changeNum === 4 &&

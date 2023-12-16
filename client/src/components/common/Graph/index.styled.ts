@@ -4,7 +4,7 @@ import { GraphProps } from ".";
 export const Body = styled.div`
   display: flex;
   align-items: flex-end;
-  gap: 35px;
+  gap: 1.5rem;
 `;
 
 export const GraphItem = styled.div<GraphProps>`
@@ -26,21 +26,21 @@ export const GraphItem = styled.div<GraphProps>`
 `;
 
 export const First = styled(GraphItem)`
-  width: 250px;
-  height: 250px;
+  width: 9rem;
+  height: 9rem;
 `;
 
 export const Second = styled(GraphItem)`
-  width: 325px;
-  height: 325px;
+  width: 12rem;
+  height: 12rem;
 `;
 
 export const Third = styled(GraphItem)`
-  width: 426px;
-  height: 425px;
+  width: 15rem;
+  height: 15rem;
 `;
 
 export const Fourth = styled(GraphItem)`
-  width: 550px;
-  height: 550px;
+  width: 18rem;
+  height: 18rem;
 `;
