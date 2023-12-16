@@ -23,8 +23,8 @@ function Next() {
   const experiment = Number(experimentId);
 
   const handleNextClick = () => {
-    if (oxId === "2") {
-      navigate(`/quiz/${experiment + 1}/begin/${(numberOxId + 1) % 3}`);
+    if (numberOxId === 2) {
+      navigate(`/quiz/${experiment + 1}/begin/0`);
     } else {
       navigate(`/quiz/${experimentId}/content/${numberOxId + 1}`);
     }
@@ -35,7 +35,7 @@ function Next() {
   const [currentTTS, setCurrentTTS] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const text = [numberOxId === 2 ? NEXT_MESSAGE[experiment] : getNextMessage(experiment, numberOxId)];
+  const text = [numberOxId === 2 ? NEXT_MESSAGE[experiment] : getNextMessage(experiment - 1, numberOxId)];
 
   useEffect(() => {
     const currentAudio = audioRef.current;

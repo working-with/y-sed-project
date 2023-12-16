@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { useNavigate } from "react-router-dom";
 
 import { userInfoAtom } from "../../recoil/atoms/user.atom";
 import getName from "../../utils/getName";
@@ -17,6 +18,8 @@ import Bottom from "../../components/common/Bottom";
 import StatusBar from "../../components/common/StatusBar";
 
 function Finish() {
+  const navigate = useNavigate();
+
   const [userReset, setUserReset] = useRecoilState(userInfoAtom);
   const [quizAnswer, setQuizAnswer] = useRecoilState(quizAnswerAtom);
   const [lastImage, setLastImage] = useRecoilState(lastImageAtom);
@@ -57,16 +60,6 @@ function Finish() {
 
     const plusCurrentTTS = () => {
       setCurrentTTS(prev => prev + 1);
-
-      setUserReset({
-        kidId: "",
-        name: "",
-        code: "",
-        gender: "",
-      });
-
-      setQuizAnswer(() => []);
-      setLastImage("");
     };
 
     if (currentAudio && text[currentTTS]) {
@@ -90,9 +83,27 @@ function Finish() {
 
       getVoice();
 
+      if (currentTTS === 2) {
+        setUserReset({
+          kidId: "",
+          name: "",
+          code: "",
+          gender: "",
+        });
+
+        setQuizAnswer(() => []);
+        setLastImage("");
+      }
+
       return () => {
         currentAudio.removeEventListener("ended", plusCurrentTTS);
       };
+    }
+
+    if (!text[currentTTS]) {
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
     }
   }, [audioRef.current, currentTTS, finish]);
 
@@ -107,7 +118,7 @@ function Finish() {
             <img src="/assets/img/icon/happyIcon.svg" alt="happy_icon" />
           </>
         ) : (
-          <img src="/assets/img/icon/smileIcon.svg" alt="smile_icon" />
+          <S.Image src="/assets/img/icon/smileIcon.svg" alt="smile_icon" />
         )}
       </S.Content>
 

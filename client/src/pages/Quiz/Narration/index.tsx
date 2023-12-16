@@ -49,11 +49,11 @@ function Narration() {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const text =
-    Number(experimentId) === (1 || 6)
+    Number(experimentId) === 1 || Number(experimentId) === 6
       ? [narration[0][0], narration[0][1], narration[0][2], narration[1][0]]
-      : Number(experimentId) === (2 || 7 || 9)
+      : Number(experimentId) === 2 || Number(experimentId) === 7 || Number(experimentId) === 9
       ? [narration[0][0], narration[1][0]]
-      : Number(experimentId) === (3 || 5 || 8)
+      : Number(experimentId) === 3 || Number(experimentId) === 5 || Number(experimentId) === 8
       ? [narration[0][0], narration[0][1], narration[1][0]]
       : [narration[0][0], narration[0][1], narration[1][0], narration[1][1]];
 
@@ -108,7 +108,7 @@ function Narration() {
 
       <S.Content>
         <img
-          src={currentTTS === text.length - 1 || !text[currentTTS] ? image && image[1].url : image && image[0].url}
+          src={currentTTS === text.length - 1 || !text[currentTTS] ? lastImage && lastImage : image && image[0].url}
           alt="이미지"
         />
       </S.Content>
