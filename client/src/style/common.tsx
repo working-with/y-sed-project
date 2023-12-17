@@ -6,8 +6,12 @@ export const bodyContainer = css`
   height: 100vh;
 `;
 
-export const height = css`
+export const quizHeight = css`
   height: calc(100% - 19rem);
+`;
+
+export const height = css`
+  height: calc(100% - 14rem);
 `;
 
 export const flexCenter = css`
