@@ -11,6 +11,6 @@ export const Content = styled.div<{ quiz?: boolean }>`
 	flex-direction: column;
 
   > img:last-child {
-    width: 40rem;
+    width: 30rem;
   }
 `;

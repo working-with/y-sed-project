@@ -13,33 +13,32 @@ export const Content = styled.div`
 export const ImageBox = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2rem 2rem;
+  gap: 1.2rem 1.2rem;
 `;
 
 export const Div = styled.div`
   position: absolute;
   z-index: 1;
   background: rgba(0, 0, 0, 0.75);
-  width: 43rem;
-  height: 29rem;
+  width: 36rem;
+  height: 22rem;
   margin: 0 auto;
 
   > div {
     position: fixed;
     ${flexCenter}
     gap: 5rem;
-    transform: translate(13%, 48%);
+    transform: translate(12.5%, 40%);
 
     > img {
-      width: 15rem;
-      height: 15rem;
+      width: 12rem;
     }
   }
 `;
 
 export const Image = styled.img`
-  width: 8rem;
+  width: 5rem;
   position: absolute;
   z-index: 2;
-  transform: translate(-120%, 40%);
+  transform: translate(-170%, 60%);
 `;

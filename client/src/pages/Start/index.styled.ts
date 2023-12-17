@@ -13,14 +13,14 @@ export const TitleBox = styled.div`
   ${flexCenter}
 
   > span {
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: 700;
     line-height: 20px; /* 15.625% */
     letter-spacing: 0.4px;
   }
 
   > img {
-    width: 25rem;
+    width: 23rem;
   }
 `;
 

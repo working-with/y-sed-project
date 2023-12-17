@@ -8,9 +8,8 @@ export const Body = styled.div`
 export const Content = styled.div`
   ${height}
   ${flexCenter}
-	gap: 45px;
 `;
 
 export const Image = styled.img`
-  width: 30rem;
+  width: 23rem;
 `;

@@ -56,6 +56,9 @@ function ExFin() {
   }, [audioRef.current, currentTTS]);
 
   const handleStartClick = () => {
+    const currentAudio = audioRef.current;
+    if (currentAudio) currentAudio.pause();
+
     navigate("/quiz/1/begin/0");
   };
 

@@ -83,18 +83,6 @@ function Finish() {
 
       getVoice();
 
-      if (currentTTS === 2) {
-        setUserReset({
-          kidId: "",
-          name: "",
-          code: "",
-          gender: "",
-        });
-
-        setQuizAnswer(() => []);
-        setLastImage("");
-      }
-
       return () => {
         currentAudio.removeEventListener("ended", plusCurrentTTS);
       };
@@ -103,6 +91,9 @@ function Finish() {
     if (!text[currentTTS]) {
       setTimeout(() => {
         navigate("/");
+
+        setQuizAnswer(() => []);
+        setLastImage("");
       }, 3000);
     }
   }, [audioRef.current, currentTTS, finish]);
@@ -111,14 +102,13 @@ function Finish() {
     <S.Body>
       <audio ref={audioRef} />
 
+      <StatusBar status={100} no={currentTTS !== 0 && true} />
+
       <S.Content>
         {currentTTS === 0 ? (
-          <>
-            <StatusBar status={100} />
-            <img src="/assets/img/icon/happyIcon.svg" alt="happy_icon" />
-          </>
+          <img src="/assets/img/icon/happyIcon.svg" alt="happy_icon" />
         ) : (
-          <S.Image src="/assets/img/icon/smileIcon.svg" alt="smile_icon" />
+          <img src="/assets/img/icon/smileIcon.svg" alt="smile_icon" />
         )}
       </S.Content>
 

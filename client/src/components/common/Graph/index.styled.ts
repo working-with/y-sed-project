@@ -8,7 +8,7 @@ export const Body = styled.div`
 `;
 
 export const GraphItem = styled.div<GraphProps>`
-  border-radius: 24px;
+  border-radius: 15px;
   cursor: pointer;
 
   > div:hover {
@@ -26,21 +26,21 @@ export const GraphItem = styled.div<GraphProps>`
 `;
 
 export const First = styled(GraphItem)`
-  width: 9rem;
-  height: 9rem;
+  width: 7rem;
+  height: 7rem;
 `;
 
 export const Second = styled(GraphItem)`
-  width: 12rem;
-  height: 12rem;
+  width: 10rem;
+  height: 10rem;
 `;
 
 export const Third = styled(GraphItem)`
-  width: 15rem;
-  height: 15rem;
+  width: 13rem;
+  height: 13rem;
 `;
 
 export const Fourth = styled(GraphItem)`
-  width: 18rem;
-  height: 18rem;
+  width: 16rem;
+  height: 16rem;
 `;

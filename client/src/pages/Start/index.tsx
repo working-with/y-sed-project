@@ -70,12 +70,6 @@ function Start() {
         currentAudio.removeEventListener("ended", plusCurrentTTS);
       };
     }
-
-    if (!text[currentTTS]) {
-      setTimeout(() => {
-        // navigate("/example/1");
-      }, 3000);
-    }
   }, [audioRef.current, currentTTS, click]);
 
   return (

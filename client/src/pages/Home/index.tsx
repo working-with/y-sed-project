@@ -54,6 +54,16 @@ function Home() {
     }));
   };
 
+  useEffect(() => {
+    setUserInfo({
+      kidId: "",
+      code: "",
+      gender: "",
+      firstName: "",
+      lastName: "",
+    });
+  }, []);
+
   const [xxClick, setXXClick] = useState<boolean>(false); // 여자
   const [xyClick, setXYClick] = useState<boolean>(false); // 남자
 
