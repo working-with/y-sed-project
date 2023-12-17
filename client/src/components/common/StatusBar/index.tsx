@@ -2,6 +2,7 @@ import * as S from "./index.styled";
 
 interface StatusProps {
   status: number;
+  no?: boolean;
 }
 
 interface PercentageImages {
@@ -16,11 +17,11 @@ const percentage: PercentageImages = {
   100: "/assets/img/icon/100.svg",
 };
 
-function StatusBar({ status }: StatusProps) {
+function StatusBar({ status, no }: StatusProps) {
   // status에 해당하는 이미지 URL을 가져오기
   const imageUrl = percentage[status] || "/assets/img/icon/default.svg";
 
-  return <S.Image src={imageUrl} alt="statusBar" />;
+  return <S.Top>{no ? "" : <S.Image src={imageUrl} alt="statusBar" />}</S.Top>;
 }
 
 export default StatusBar;
