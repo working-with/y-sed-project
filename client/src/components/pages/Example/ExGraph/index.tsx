@@ -33,6 +33,9 @@ function ExGraph({ sad }: ExGraphProps) {
   };
 
   const handleBlueBtnClick = () => {
+    const currentAudio = audioRef.current;
+    if (currentAudio) currentAudio.pause();
+
     setBtnClick(true);
     if (sad) navigate("/example/finish");
   };

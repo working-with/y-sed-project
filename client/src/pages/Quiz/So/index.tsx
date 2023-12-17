@@ -29,7 +29,11 @@ function So() {
   const [quizAnswer, setQuizAnswer] = useRecoilState(quizAnswerAtom);
 
   const handleBtnClick = () => {
+    const currentAudio = audioRef.current;
+
     if (selectedIndex !== null) {
+      if (currentAudio) currentAudio.pause();
+
       const newQuiz = {
         [`${experimentId}-${Number(oxId) + 1}`]: {
           booleanAnswer: 1,
@@ -104,11 +108,9 @@ function So() {
     <S.Body>
       <audio ref={audioRef} />
 
-      <S.Content>
-        <S.Status>
-          <StatusBar status={status} />
-        </S.Status>
+      <StatusBar status={status} />
 
+      <S.Content>
         <Graph onClick={handleGraphClick} index={selectedIndex} />
       </S.Content>
 

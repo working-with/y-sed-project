@@ -23,6 +23,9 @@ function Next() {
   const experiment = Number(experimentId);
 
   const handleNextClick = () => {
+    const currentAudio = audioRef.current;
+    if (currentAudio) currentAudio.pause();
+
     if (numberOxId === 2) {
       navigate(`/quiz/${experiment + 1}/begin/0`);
     } else {
@@ -88,11 +91,8 @@ function Next() {
     <S.Body>
       <audio ref={audioRef} />
 
+      <StatusBar status={numberOxId} />
       <S.Content>
-        <S.Top>
-          <StatusBar status={numberOxId} />
-        </S.Top>
-
         {numberOxId === 2 && (
           <S.ImageBox>
             <img src={`/assets/img/nextImage/nextImage${experimentId}.svg`} alt="nextImage" />

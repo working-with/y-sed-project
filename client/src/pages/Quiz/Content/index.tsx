@@ -84,8 +84,12 @@ function Content() {
   const [quizAnswer, setQuizAnswer] = useRecoilState(quizAnswerAtom);
 
   const handleNextBtnClick = () => {
+    const currentAudio = audioRef.current;
+
     // x 버튼 클릭 후 next 누를 때
     if (noBtn) {
+      if (currentAudio) currentAudio.pause();
+
       // x 버튼 클릭 후 next 누를 때 quizAnswer 상태 업데이트
       const newQuiz = {
         [`${experimentId}-${Number(oxId) + 1}`]: {
@@ -103,6 +107,8 @@ function Content() {
 
       // o 버튼 클릭 후 next 누를 때
     } else if (yesBtn) {
+      if (currentAudio) currentAudio.pause();
+
       navigate(`/quiz/${params.experimentId}/so/${params.oxId}`);
     } else {
       alert("O 또는 X 버튼을 입력 후에 다음으로 넘어가 주세요!");
@@ -167,11 +173,8 @@ function Content() {
     <S.Body>
       <audio ref={audioRef} />
 
+      <StatusBar status={status} />
       <S.Content>
-        <S.Top>
-          <StatusBar status={status} />
-        </S.Top>
-
         <S.Qox>
           <div>
             <S.YesImg src="/assets/img/icon/blueO.svg" alt="O" onClick={handleOClick} yesBtn={yesBtn} />
