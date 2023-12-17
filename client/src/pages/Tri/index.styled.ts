@@ -11,6 +11,6 @@ export const ImgBox = styled.div`
 	gap: 2rem;
 
   > img {
-    width: 32rem;
+    width: 25rem;
   }
 `;

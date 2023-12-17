@@ -13,7 +13,7 @@ export const Body = styled.div`
 export const Content = styled.div`
   ${flexCenter}
   flex-direction: column;
-  gap: 4rem;
+  gap: 3rem;
 `;
 
 export const Wrapper = styled.div`
@@ -25,19 +25,18 @@ export const Wrapper = styled.div`
 `;
 
 export const TitleBox = styled(Wrapper)`
-  margin-right: 4rem;
-  width: 14rem;
-  height: 6rem;
+  margin-right: 3rem;
+  width: 12rem;
   ${flexCenter}
 
   > span {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 `;
 
 export const Input = styled.input`
   width: 22rem;
-  font-size: 3rem;
+  font-size: 2.5rem;
   border: none;
   border-bottom: 2px solid ${({ theme }) => theme.PALETTE.black};
   text-align: center;
@@ -49,10 +48,10 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button<ButtonProps>`
-  width: 10rem;
-  height: 5rem;
-  border-radius: 1.5rem;
-  font-size: 2.5rem;
+  width: 9.5rem;
+  height: 4rem;
+  border-radius: 1.2rem;
+  font-size: 2rem;
   background-color: ${({ theme }) => theme.PALETTE.blue[200]};
   color: ${({ theme }) => theme.PALETTE.white};
 

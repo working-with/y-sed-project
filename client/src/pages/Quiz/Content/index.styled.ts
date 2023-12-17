@@ -21,7 +21,7 @@ export const Content = styled.div<{ quiz?: boolean }>`
 	flex-direction: column;
 
   > img:last-child {
-    width: 40rem;
+    width: 30rem;
   }
 `;
 
@@ -29,20 +29,18 @@ export const Qox = styled.div`
   position: absolute;
   z-index: 1;
   background: rgba(0, 0, 0, 0.75);
-  width: 41rem;
-  height: 25.5rem;
+  width: 31rem;
+  height: 19.5rem;
   margin: 0 auto;
-  transform: translate(-0%, 11.8%);
 
   > div {
     position: fixed;
     ${flexCenter}
-    gap: 5rem;
+    gap: 3rem;
     transform: translate(12%, 35%);
 
     > img {
-      width: 14rem;
-      height: 14rem;
+      width: 11rem;
     }
   }
 

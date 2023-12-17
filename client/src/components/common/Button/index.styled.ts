@@ -49,11 +49,10 @@ export const shapeCSS = {
 };
 
 export const Button = styled.button<ButtonProps>`
-  width: 12rem;
-  height: 6rem;
-  font-size: 2rem;
-  border-radius: 2rem;
-
+  width: 11rem;
+  height: 5.5rem;
+  font-size: 1.8rem;
+  border-radius: 1.8rem;
   font-weight: 800;
   /* letter-spacing: 3.9px; */
 

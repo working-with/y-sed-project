@@ -13,13 +13,7 @@ export const Content = styled.div`
   flex-direction: column;
   gap: 2rem;
 
-  > img:nth-child(2) {
+  > img {
     width: 25rem;
-    margin: 30px 0 110px 0;
   }
-`;
-
-export const Image = styled.img`
-  width: 25rem;
-  margin-bottom: 1rem;
 `;
