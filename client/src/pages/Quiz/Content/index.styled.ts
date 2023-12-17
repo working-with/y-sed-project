@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { bodyContainer, flexCenter, height } from "../../../style/common";
+import { bodyContainer, flexCenter, quizHeight } from "../../../style/common";
 
 interface ImgProps {
   yesBtn?: boolean;
@@ -17,7 +17,7 @@ export const Top = styled.div`
 
 export const Content = styled.div<{ quiz?: boolean }>`
   ${flexCenter}
-  ${height}
+  ${quizHeight}
 	flex-direction: column;
 
   > img:last-child {
