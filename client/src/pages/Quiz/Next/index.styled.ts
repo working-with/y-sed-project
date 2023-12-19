@@ -4,11 +4,11 @@ import { bodyContainer, flexCenter, quizHeight } from "../../../style/common";
 const fadeOut = keyframes`
   0% {
     opacity: 1;
-    transform: translate(-90%, -60%) scale(1);
+    transform: translate(-160%, -60%) scale(1);
   }
   100% {
-    opacity: 0;
-    transform: translate(-90%, -60%) scale(1.4); 
+    opacity: 1;
+    transform:translate(-160%, -60%) scale(1.4); 
   }
 `;
 
@@ -29,12 +29,12 @@ export const ImageBox = styled.div`
   position: absolute;
 
   > img {
-    width: 20rem;
+    width: 15rem;
     position: fixed;
-    transform: translate(-90%, -60%);
+    transform: translate(-160%, -60%);
     animation: ${fadeOut} 2s 1 ease alternate;
 
-    opacity: 0;
+    /* opacity: 0; */
     animation-fill-mode: forwards; /* 애니메이션 종료 후에 상태 유지 */
   }
 `;
