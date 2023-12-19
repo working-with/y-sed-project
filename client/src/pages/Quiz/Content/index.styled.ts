@@ -50,6 +50,8 @@ export const Qox = styled.div`
 `;
 
 export const YesImg = styled.img<ImgProps>`
+  cursor: pointer;
+
   ${({ yesBtn }) =>
     yesBtn &&
     css`
@@ -58,6 +60,8 @@ export const YesImg = styled.img<ImgProps>`
 `;
 
 export const NoImg = styled.img<ImgProps>`
+  cursor: pointer;
+
   ${({ noBtn }) =>
     noBtn &&
     css`
