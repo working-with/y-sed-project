@@ -80,12 +80,6 @@ function ExGraph({ sad }: ExGraphProps) {
         currentAudio.removeEventListener("ended", plusCurrentTTS);
       };
     }
-
-    if (!text[currentTTS]) {
-      setTimeout(() => {
-        setBtnClick(true);
-      });
-    }
   }, [audioRef.current, currentTTS]);
 
   return (
