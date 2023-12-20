@@ -175,12 +175,14 @@ function Content() {
 
       <StatusBar status={status} />
       <S.Content>
-        <S.Qox>
-          <div>
-            <S.YesImg src="/assets/img/icon/blueO.svg" alt="O" onClick={handleOClick} yesBtn={yesBtn} />
-            <S.NoImg src="/assets/img/icon/redX.svg" alt="X" onClick={handleXClick} noBtn={noBtn} />
-          </div>
-        </S.Qox>
+        {(text.length - 1 === currentTTS || !text[currentTTS]) && (
+          <S.Qox>
+            <div>
+              <S.YesImg src="/assets/img/icon/blueO.svg" alt="O" onClick={handleOClick} yesBtn={yesBtn} />
+              <S.NoImg src="/assets/img/icon/redX.svg" alt="X" onClick={handleXClick} noBtn={noBtn} />
+            </div>
+          </S.Qox>
+        )}
 
         <img src={image} alt="storyImage" />
       </S.Content>
