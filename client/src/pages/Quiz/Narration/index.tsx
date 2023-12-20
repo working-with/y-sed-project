@@ -42,7 +42,7 @@ function Narration() {
   }, []);
 
   // experimentId에 맞게 narration 가져오기
-  const exId = Number(experimentId) - 1;
+  const exId = Number(experimentId);
   const { narration } = getNarration({ name, exId });
 
   const [currentTTS, setCurrentTTS] = useState(0);

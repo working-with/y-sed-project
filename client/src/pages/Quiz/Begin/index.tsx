@@ -9,6 +9,7 @@ import { Experiment, ResData } from "../../../@types";
 import * as S from "./index.styled";
 
 import Bottom from "../../../components/common/Bottom";
+import common from "../../../utils/common";
 
 function Begin() {
   const navigate = useNavigate();
@@ -39,7 +40,11 @@ function Begin() {
   const [currentTTS, setCurrentTTS] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const text = ["이제 이야기를 들려줄 거야! 잘 들어보자."];
+  const { BEG, BEG_N } = common(userInfo.name);
+
+  const text = [
+    experimentId === "0" ? "이제 이야기를 들려줄게. 잘 들어보자." : "이제 다음 이야기를 들려줄게. 잘 들어보자.",
+  ];
 
   useEffect(() => {
     const currentAudio = audioRef.current;
@@ -89,10 +94,7 @@ function Begin() {
         <img src={image && image} alt="begin_experiment_Image" />
       </S.Content>
 
-      <Bottom top={true}>
-        이제 이야기를 들려줄거야!
-        <br />잘 들어보자.
-      </Bottom>
+      <Bottom top={true}>{experimentId === "0" ? BEG : BEG_N}</Bottom>
     </S.Body>
   );
 }

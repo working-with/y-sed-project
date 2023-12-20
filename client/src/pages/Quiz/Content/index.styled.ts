@@ -55,7 +55,7 @@ export const YesImg = styled.img<ImgProps>`
   ${({ yesBtn }) =>
     yesBtn &&
     css`
-      transform: scale(1.3);
+      transform: scale(1.4);
     `}
 `;
 
@@ -65,6 +65,6 @@ export const NoImg = styled.img<ImgProps>`
   ${({ noBtn }) =>
     noBtn &&
     css`
-      transform: scale(1.3);
+      transform: scale(1.4);
     `}
 `;
