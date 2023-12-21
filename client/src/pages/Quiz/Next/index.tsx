@@ -38,7 +38,7 @@ function Next() {
   const [currentTTS, setCurrentTTS] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const text = [numberOxId === 2 ? NEXT_MESSAGE[experiment] : getNextMessage(experiment - 1, numberOxId)];
+  const text = [numberOxId === 2 ? NEXT_MESSAGE[experiment] : getNextMessage(experiment, numberOxId)];
 
   useEffect(() => {
     const currentAudio = audioRef.current;
@@ -48,6 +48,12 @@ function Next() {
     };
 
     if (currentAudio && text[currentTTS]) {
+      const tadaAudio = new Audio();
+      const tadaEvent = () => {
+        currentAudio.play().catch(e => console.log(e));
+      };
+
+      tadaAudio.addEventListener("ended", tadaEvent);
       currentAudio.addEventListener("ended", plusCurrentTTS);
 
       const getVoice = async () => {
@@ -61,20 +67,15 @@ function Next() {
         const data = response.data;
 
         const url = URL.createObjectURL(new Blob([data]));
+        currentAudio.src = url;
 
         if (numberOxId === 2) {
           const audioUrl = experiment % 2 ? "/assets/mp3/MP_tada_.mp3" : "/assets/mp3/MP_Tada_Fanfare_A.mp3";
 
-          const audio = new Audio(audioUrl);
+          tadaAudio.src = audioUrl;
 
-          audio.play().catch(e => console.log(e));
-
-          audio.addEventListener("ended", () => {
-            currentAudio.src = url;
-            currentAudio.play().catch(e => console.log(e));
-          });
+          tadaAudio.play().catch(e => console.log(e));
         } else {
-          currentAudio.src = url;
           currentAudio.play().catch(e => console.log(e));
         }
       };
@@ -82,6 +83,7 @@ function Next() {
       getVoice();
 
       return () => {
+        tadaAudio.removeEventListener("ended", tadaEvent);
         currentAudio.removeEventListener("ended", plusCurrentTTS);
       };
     }
@@ -91,9 +93,9 @@ function Next() {
     <S.Body>
       <audio ref={audioRef} />
 
-      <StatusBar status={numberOxId} />
+      {experiment !== 0 && <StatusBar status={numberOxId} />}
       <S.Content>
-        {numberOxId === 2 && (
+        {numberOxId === 2 && experiment !== 0 && (
           <S.ImageBox>
             <img src={`/assets/img/nextImage/nextImage${experimentId}.svg`} alt="nextImage" />
           </S.ImageBox>
@@ -101,7 +103,7 @@ function Next() {
 
         <S.Middle>
           <Button variant="green" onClick={handleNextClick}>
-            다음으로
+            {experiment !== 0 ? "다음으로" : "시작하기"}
           </Button>
         </S.Middle>
       </S.Content>
