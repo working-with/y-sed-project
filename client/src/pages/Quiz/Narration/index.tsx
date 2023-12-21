@@ -49,11 +49,11 @@ function Narration() {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const text =
-    Number(experimentId) === 1 || Number(experimentId) === 6
+    exId === 1 || exId === 6
       ? [narration[0][0], narration[0][1], narration[0][2], narration[1][0]]
-      : Number(experimentId) === 2 || Number(experimentId) === 7 || Number(experimentId) === 9
+      : exId === 2 || exId === 7 || exId === 9 || exId === 0
       ? [narration[0][0], narration[1][0]]
-      : Number(experimentId) === 3 || Number(experimentId) === 5 || Number(experimentId) === 8
+      : exId === 3 || exId === 5 || exId === 8
       ? [narration[0][0], narration[0][1], narration[1][0]]
       : [narration[0][0], narration[0][1], narration[1][0], narration[1][1]];
 
