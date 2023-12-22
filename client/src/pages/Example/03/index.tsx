@@ -56,7 +56,7 @@ function Ex03() {
     if (!text[currentTTS]) {
       setTimeout(() => {
         navigate("/quiz/0/begin/0");
-      }, 3000);
+      }, 5000);
     }
   }, [audioRef.current, currentTTS]);
 

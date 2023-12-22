@@ -69,7 +69,7 @@ function Ex02() {
 
       setTimeout(() => {
         navigate("/example/3");
-      });
+      }, 5000);
     }
   }, [audioRef.current, currentTTS]);
 
