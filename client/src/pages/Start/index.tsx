@@ -30,7 +30,7 @@ function Start() {
   const userInfo = useRecoilValue(userInfoAtom);
   const name = getName(userInfo.lastName);
 
-  const kidName = name.includes("이") ? `${name}아` : `${name}야`;
+  const kidName = name.includes("이") ? `${name.slice(0, name.length - 1)}아` : `${name}야`;
 
   const [currentTTS, setCurrentTTS] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
