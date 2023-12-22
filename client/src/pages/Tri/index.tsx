@@ -65,7 +65,7 @@ function Tri() {
     if (!text[currentTTS]) {
       setTimeout(() => {
         navigate("/example/1");
-      }, 3000);
+      }, 5000);
     }
   }, [audioRef.current, currentTTS]);
 

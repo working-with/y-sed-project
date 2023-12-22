@@ -64,7 +64,7 @@ function Ex01() {
     if (!text[currentTTS]) {
       setTimeout(() => {
         navigate("/example/2");
-      });
+      }, 5000);
     }
   }, [audioRef.current, currentTTS]);
 
