@@ -5,7 +5,7 @@ const getHeader = () => {
     { label: "sex", key: "gender" },
   ];
 
-  for (let i = 1; i < 10; i++) {
+  for (let i = 0; i < 10; i++) {
     for (let j = 1; j < 4; j++) {
       const label = `n_0${i}_0${j}SOX`;
       const label2 = `n_0${i}_0${j}SO`;

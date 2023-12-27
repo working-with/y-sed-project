@@ -1,5 +1,10 @@
 import styled, { keyframes } from "styled-components";
-import { bodyContainer, flexCenter, quizHeight } from "../../../style/common";
+import { bodyContainer, flexCenter, height, quizHeight } from "../../../style/common";
+
+interface ContentProps {
+  experiment: number;
+  numberOxId: number;
+}
 
 const fadeOut = keyframes`
   0% {
@@ -16,8 +21,8 @@ export const Body = styled.div`
   ${bodyContainer}
 `;
 
-export const Content = styled.div`
-  ${quizHeight}
+export const Content = styled.div<ContentProps>`
+  ${({ experiment, numberOxId }) => (experiment === 0 && numberOxId === 2 ? `${height}` : `${quizHeight}`)}
   ${flexCenter}
 `;
 
