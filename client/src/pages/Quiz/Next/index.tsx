@@ -93,7 +93,7 @@ function Next() {
     <S.Body>
       <audio ref={audioRef} />
 
-      {experiment !== 0 && <StatusBar status={numberOxId === 2 ? 100 : numberOxId} />}
+      {experiment === 0 && numberOxId === 2 ? "" : <StatusBar status={numberOxId === 2 ? 100 : numberOxId} />}
       <S.Content experiment={experiment} numberOxId={numberOxId}>
         {numberOxId === 2 && experiment !== 0 && (
           <S.ImageBox>
@@ -103,7 +103,7 @@ function Next() {
 
         <S.Middle>
           <Button variant="green" onClick={handleNextClick}>
-            {experiment !== 0 ? "다음으로" : "시작하기"}
+            {experiment === 0 && numberOxId === 2 ? "시작하기" : "다음으로"}
           </Button>
         </S.Middle>
       </S.Content>
