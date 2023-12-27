@@ -93,8 +93,8 @@ function Next() {
     <S.Body>
       <audio ref={audioRef} />
 
-      {experiment !== 0 && <StatusBar status={numberOxId} />}
-      <S.Content>
+      {experiment !== 0 && <StatusBar status={numberOxId === 2 ? 100 : numberOxId} />}
+      <S.Content experiment={experiment} numberOxId={numberOxId}>
         {numberOxId === 2 && experiment !== 0 && (
           <S.ImageBox>
             <img src={`/assets/img/nextImage/nextImage${experimentId}.svg`} alt="nextImage" />
