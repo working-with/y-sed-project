@@ -19,6 +19,7 @@ const imgUrl = {
   sad: "/assets/img/icon/sadIcon.svg",
 };
 
+// 안 쓰는 페이지
 // shp09랑 공용
 function Ex04({ sad }: Ex04Props) {
   const userInfo = useRecoilValue(userInfoAtom);
