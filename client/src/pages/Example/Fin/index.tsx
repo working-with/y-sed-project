@@ -11,6 +11,7 @@ import * as S from "./index.styled";
 import Bottom from "../../../components/common/Bottom";
 import Button from "../../../components/common/Button";
 
+// 안 쓰는 페이지
 function ExFin() {
   const navigate = useNavigate();
 
