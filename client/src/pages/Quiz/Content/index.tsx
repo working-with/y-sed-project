@@ -151,6 +151,9 @@ function Content() {
     };
 
     if (currentAudio && text[currentTTS] && scripts.length) {
+      currentAudio.pause();
+      currentAudio.src = "";
+
       currentAudio.addEventListener("ended", plusCurrentTTS);
 
       const getVoice = async () => {

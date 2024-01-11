@@ -42,9 +42,7 @@ function Begin() {
 
   const { BEG, BEG_N } = common(userInfo.name);
 
-  const text = [
-    experimentId === "0" ? "이제 이야기를 들려줄게. 잘 들어보자." : "이제 다음 이야기를 들려줄게. 잘 들어보자.",
-  ];
+  const text = ["이제 이야기를 들려줄게. 잘 들어보자."];
 
   useEffect(() => {
     const currentAudio = audioRef.current;
@@ -54,6 +52,9 @@ function Begin() {
     };
 
     if (currentAudio && text[currentTTS]) {
+      currentAudio.pause();
+      currentAudio.src = "";
+
       currentAudio.addEventListener("ended", plusCurrentTTS);
 
       const getVoice = async () => {
