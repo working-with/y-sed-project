@@ -43,9 +43,15 @@ function So() {
 
       setQuizAnswer((prev: any) => [...prev, newQuiz]);
 
-      if (experimentId === "9" && oxId === "2") {
-        navigate("/finish");
-      } else navigate(`/quiz/${experimentId}/next/${oxId}`);
+      // 실험 문항이 9번이고 oxId가 2번일 경우 끝
+      if (experimentId === "9" && oxId === "2") return navigate("/finish");
+
+      // 실험 문항이 0번일 경우
+      if (experimentId === "0") return navigate(`/quiz/${experimentId}/next/${oxId}`);
+
+      // 실험 문항이 0번이 아니고 oxId가 2번일 경우 || 실험 문항이 0번이 아니고 oxId가 2번이 아닐 경우
+      if (experimentId !== "0" && oxId === "2") return navigate(`/quiz/${experimentId}/next/${oxId}`);
+      else return navigate(`/quiz/${experimentId}/content/${Number(oxId) + 1}`);
     } else {
       alert("그래프를 클릭해 주세요!");
     }

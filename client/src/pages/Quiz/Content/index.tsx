@@ -54,17 +54,21 @@ function Content() {
     };
 
     getContent();
-  }, []);
+  }, [oxId]);
 
   // sqx 스크립트 나올 차례 -> ~이도 그럴 것 같아? 안 그럴 것 같아?
   const [sqx, setSqx] = useState<boolean>(false);
 
   useEffect(() => {
+    setCurrentTTS(0);
+    setNoBtn(false);
+    setYesBtn(false);
+
     if (Number(oxId) !== 0) {
       // 퀴즈가 0번째가 아닐 경우 바로 변경
       setStatus(Number(oxId));
     }
-  }, []);
+  }, [oxId]);
 
   // ox 버튼 클릭 상태 업데이트
   const [yesBtn, setYesBtn] = useState<boolean>(false);
@@ -101,15 +105,21 @@ function Content() {
       setQuizAnswer((prev: any) => [...prev, newQuiz]);
 
       // x 버튼 클릭 후 9-2 일 경우
-      if (experimentId === "9" && oxId === "2") {
-        navigate("/finish");
-      } else navigate(`/quiz/${experimentId}/next/${oxId}`);
+      if (experimentId === "9" && oxId === "2") navigate("/finish");
+
+      // 실험 문항이 0 인 경우
+      if (experimentId === "0") navigate(`/quiz/${experimentId}/next/${oxId}`);
+
+      // 실험 문항이 0이 아니고 oxId가 2번인 경우
+      if (experimentId !== "0" && oxId === "2") navigate(`/quiz/${experimentId}/next/${oxId}`);
+      // 실험 문항이 0이 아닌 경우
+      else navigate(`/quiz/${experimentId}/content/${Number(oxId) + 1}`);
 
       // o 버튼 클릭 후 next 누를 때
     } else if (yesBtn) {
       if (currentAudio) currentAudio.pause();
 
-      navigate(`/quiz/${params.experimentId}/so/${params.oxId}`);
+      navigate(`/quiz/${experimentId}/so/${oxId}`);
     } else {
       alert("O 또는 X 버튼을 입력 후에 다음으로 넘어가 주세요!");
     }
