@@ -45,7 +45,7 @@ export const Qox = styled.div`
   }
 
   & img:hover {
-    transform: scale(1.25);
+    transform: scale(1.5);
   }
 `;
 
@@ -55,7 +55,7 @@ export const YesImg = styled.img<ImgProps>`
   ${({ yesBtn }) =>
     yesBtn &&
     css`
-      transform: scale(1.4);
+      transform: scale(1.5);
     `}
 `;
 
@@ -65,6 +65,6 @@ export const NoImg = styled.img<ImgProps>`
   ${({ noBtn }) =>
     noBtn &&
     css`
-      transform: scale(1.4);
+      transform: scale(1.5);
     `}
 `;
