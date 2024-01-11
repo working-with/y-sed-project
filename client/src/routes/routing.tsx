@@ -13,8 +13,6 @@ const Tri = lazy(() => import("../pages/Tri"));
 const Ex01 = lazy(() => import("../pages/Example/01"));
 const Ex02 = lazy(() => import("../pages/Example/02"));
 const Ex03 = lazy(() => import("../pages/Example/03"));
-const Ex04 = lazy(() => import("../pages/Example/04"));
-const ExFin = lazy(() => import("../pages/Example/Fin"));
 
 // 퀴즈 페이지
 const Begin = lazy(() => import("../pages/Quiz/Begin"));
@@ -60,15 +58,6 @@ const router = createBrowserRouter([
       {
         path: "/example/3",
         element: <Ex03 />,
-      },
-      // guiShp07 - 08, guiShp10 - 11
-      {
-        path: "/example/4",
-        element: <Ex04 />,
-      },
-      {
-        path: "/example/finish",
-        element: <ExFin />,
       },
 
       // 퀴즈 페이지
