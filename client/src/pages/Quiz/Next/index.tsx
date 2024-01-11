@@ -27,7 +27,7 @@ function Next() {
     if (currentAudio) currentAudio.pause();
 
     if (numberOxId === 2) {
-      navigate(`/quiz/${experiment + 1}/begin/0`);
+      navigate(`/quiz/${experiment + 1}/narration/0`);
     } else {
       navigate(`/quiz/${experimentId}/content/${numberOxId + 1}`);
     }

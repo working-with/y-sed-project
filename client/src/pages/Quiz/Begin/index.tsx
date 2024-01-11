@@ -82,7 +82,7 @@ function Begin() {
     if (!text[currentTTS]) {
       setTimeout(() => {
         navigate(`/quiz/${experimentId}/narration/0`);
-      }, 3000);
+      }, 1500);
     }
   }, [audioRef.current, currentTTS]);
 
