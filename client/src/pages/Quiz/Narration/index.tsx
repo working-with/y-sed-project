@@ -70,6 +70,9 @@ function Narration() {
     };
 
     if (currentAudio && text[currentTTS]) {
+      currentAudio.pause();
+      currentAudio.src = "";
+
       currentAudio.addEventListener("ended", plusCurrentTTS);
 
       const getVoice = async () => {

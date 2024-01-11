@@ -48,6 +48,9 @@ function Next() {
     };
 
     if (currentAudio && text[currentTTS]) {
+      currentAudio.pause();
+      currentAudio.src = "";
+
       const tadaAudio = new Audio();
       const tadaEvent = () => {
         currentAudio.play().catch(e => console.log(e));
