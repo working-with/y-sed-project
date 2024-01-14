@@ -112,7 +112,7 @@ function Content() {
       }
 
       // 실험 문항이 0 인 경우
-      else if (experimentNumberId === 0 && oxNumberId === (0 || 1 || 2)) {
+      else if (experimentNumberId === 0 && [0, 1, 2].includes(oxNumberId)) {
         navigate(`/quiz/${experimentId}/next/${oxId}`);
       }
 
