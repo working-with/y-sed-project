@@ -50,12 +50,7 @@ function Content() {
       const data = response.data.data;
       const test = data[0].question;
 
-      console.log(data);
-      console.log(test, "테스트");
-
       const q = test && test.filter(el => el.testCode && el.testCode.includes(`0${Number(oxId) + 1}`));
-
-      console.log(q, "시발 좆같네");
 
       setScripts(q);
     };
