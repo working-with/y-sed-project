@@ -22,6 +22,8 @@ function Content() {
   const params = useParams();
 
   const { experimentId, oxId } = params;
+  const oxNumberId = Number(oxId);
+  const experimentNumberId = Number(experimentId);
 
   // 아동 정보에서 이름 얻기
   const userInfo = useRecoilValue(userInfoAtom);
@@ -105,15 +107,23 @@ function Content() {
       setQuizAnswer((prev: any) => [...prev, newQuiz]);
 
       // x 버튼 클릭 후 9-2 일 경우
-      if (experimentId === "9" && oxId === "2") navigate("/finish");
+      if (experimentNumberId === 9 && oxNumberId === 2) {
+        navigate("/finish");
+      }
 
       // 실험 문항이 0 인 경우
-      if (experimentId === "0") navigate(`/quiz/${experimentId}/next/${oxId}`);
+      else if (experimentNumberId === 0 && oxNumberId === (0 || 1 || 2)) {
+        navigate(`/quiz/${experimentId}/next/${oxId}`);
+      }
 
       // 실험 문항이 0이 아니고 oxId가 2번인 경우
-      if (experimentId !== "0" && oxId === "2") navigate(`/quiz/${experimentId}/next/${oxId}`);
+      else if (experimentNumberId !== 0 && oxNumberId === 2) {
+        navigate(`/quiz/${experimentId}/next/${oxId}`);
+      }
       // 실험 문항이 0이 아닌 경우
-      else navigate(`/quiz/${experimentId}/content/${Number(oxId) + 1}`);
+      else {
+        navigate(`/quiz/${experimentId}/content/${Number(oxId) + 1}`);
+      }
 
       // o 버튼 클릭 후 next 누를 때
     } else if (yesBtn) {
