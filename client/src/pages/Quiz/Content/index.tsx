@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -50,7 +50,12 @@ function Content() {
       const data = response.data.data;
       const test = data[0].question;
 
+      console.log(data);
+      console.log(test, "테스트");
+
       const q = test && test.filter(el => el.testCode && el.testCode.includes(`0${Number(oxId) + 1}`));
+
+      console.log(q, "시발 좆같네");
 
       setScripts(q);
     };
@@ -139,14 +144,17 @@ function Content() {
   const [currentTTS, setCurrentTTS] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const text =
-    Number(oxId) === 0 && (Number(experimentId) === 2 || Number(experimentId) === 8)
+  const text = useMemo(() => {
+    return Number(oxId) === 0 && (Number(experimentId) === 2 || Number(experimentId) === 8)
       ? [QOX, scripts.length && scripts[0].script, scripts.length && scripts[1].script, SQX] // 1. 1번째 질문이고 실험 문항이 2, 8번인 경우
       : Number(oxId) === 0
       ? [QOX, scripts.length && scripts[0].script, SQX] // 2. 1번째 질문이고 2, 8이 아닌 경우
       : Number(oxId) === 2 && Number(experimentId) === 9
       ? [scripts.length && scripts[0].script, scripts.length && scripts[1].script, SQX] // 3. 3번째 질문이고 실험 문항이 9번일 경우
       : [scripts.length && scripts[0].script, SQX]; // 4. 2, 3번째 질문
+  }, [scripts]);
+
+  console.log(text);
 
   useEffect(() => {
     const currentAudio = audioRef.current;
