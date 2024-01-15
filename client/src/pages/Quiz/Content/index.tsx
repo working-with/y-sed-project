@@ -15,6 +15,7 @@ import * as S from "./index.styled";
 
 import Bottom from "../../../components/common/Bottom";
 import StatusBar from "../../../components/common/StatusBar";
+import getSqx from "../../../utils/getSqx";
 
 function Content() {
   // 실험 번호와 실험 문항의 번호 추출
@@ -30,7 +31,7 @@ function Content() {
   const name = getName(userInfo.lastName);
 
   // 백에서 받아오는 스크립트 제외 부분
-  const { QOX, SQX } = common(name);
+  const { QOX } = common(name);
 
   // 실험 가장 마지막 이미지가 퀴즈 배경 이미지
   const image = useRecoilValue(lastImageAtom);
@@ -139,6 +140,8 @@ function Content() {
   const [currentTTS, setCurrentTTS] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
 
+  const { SQX } = getSqx({ name, oxId: oxNumberId, exId: experimentNumberId });
+
   const text = useMemo(() => {
     return Number(oxId) === 0 && (Number(experimentId) === 2 || Number(experimentId) === 8)
       ? [QOX, scripts.length && scripts[0].script, scripts.length && scripts[1].script, SQX] // 1. 1번째 질문이고 실험 문항이 2, 8번인 경우
@@ -148,6 +151,8 @@ function Content() {
       ? [scripts.length && scripts[0].script, scripts.length && scripts[1].script, SQX] // 3. 3번째 질문이고 실험 문항이 9번일 경우
       : [scripts.length && scripts[0].script, SQX]; // 4. 2, 3번째 질문
   }, [scripts]);
+
+  const textStrings = text.map(item => String(item));
 
   useEffect(() => {
     const currentAudio = audioRef.current;
@@ -212,7 +217,7 @@ function Content() {
       </S.Content>
 
       <Bottom button={sqx && true} color={yesBtn || noBtn ? "bluePlay" : ""} onClick={handleNextBtnClick}>
-        {!text[currentTTS] ? text[text.length - 1] : `${text[currentTTS]}`.replace(/\\n/g, "\n")}
+        {!textStrings[currentTTS] ? textStrings[text.length - 1] : `${textStrings[currentTTS]}`.replace(/\\n/g, "\n")}
       </Bottom>
     </S.Body>
   );
