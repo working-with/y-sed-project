@@ -24,7 +24,7 @@ function Ex02() {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const text = [
-    `그리고 얼만큼 ${name}와\n 같은지 알려줄래?`,
+    `그리고 얼만큼 ${name}와 같은지 알려줄래?`,
     "가장 작은 네모는 너의 마음과\n 아주 조금 비슷하다는 걸 말해.", // 1
     "그 다음 네모는 조금 비슷한 거고,", // 2
     "그 다음 네모는 꽤 많이,", // 3
