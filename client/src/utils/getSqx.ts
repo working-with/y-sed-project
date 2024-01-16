@@ -9,7 +9,7 @@ type SqxOXData = {
 };
 
 type SqxData = {
-  SQX: SqxOXData;
+  SQX: SqxOXData[number];
 };
 
 const getSqx = ({ name, exId, oxId }: SqxProps): SqxData => {
