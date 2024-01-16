@@ -23,9 +23,9 @@ function Ex01() {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const text = [
-    `각 이야기 마다, ${name}가\n 느낄 수 있는 다양한 마음이 있어.`,
-    "이야기가 끝난 후에는 \n내가 이 마음에 대해 물어볼건데,",
-    `이 마음이 ${name}와 같은지 아닌지`,
+    `이야기 마다, ${name}가\n 느낄 수 있는 다양한 마음이 있어.`,
+    "이야기가 끝난 후에는 \n내가 이 마음들에 대해 물어볼건데,",
+    `이 마음이 ${name}의 마음과 같은지 아닌지`,
   ];
 
   useEffect(() => {
