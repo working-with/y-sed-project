@@ -140,9 +140,9 @@ function Content() {
   const [currentTTS, setCurrentTTS] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const { SQX } = getSqx({ name, oxId: oxNumberId, exId: experimentNumberId });
-
   const text = useMemo(() => {
+    const { SQX } = getSqx({ name, oxId: oxNumberId, exId: experimentNumberId });
+
     return Number(oxId) === 0 && (Number(experimentId) === 2 || Number(experimentId) === 8)
       ? [QOX, scripts.length && scripts[0].script, scripts.length && scripts[1].script, SQX] // 1. 1번째 질문이고 실험 문항이 2, 8번인 경우
       : Number(oxId) === 0
@@ -152,7 +152,7 @@ function Content() {
       : [scripts.length && scripts[0].script, SQX]; // 4. 2, 3번째 질문
   }, [scripts]);
 
-  const textStrings = text.map(item => String(item));
+  // const textStrings = text.map(item => String(item));
 
   useEffect(() => {
     const currentAudio = audioRef.current;
@@ -217,7 +217,7 @@ function Content() {
       </S.Content>
 
       <Bottom button={sqx && true} color={yesBtn || noBtn ? "bluePlay" : ""} onClick={handleNextBtnClick}>
-        {!textStrings[currentTTS] ? textStrings[text.length - 1] : `${textStrings[currentTTS]}`.replace(/\\n/g, "\n")}
+        {!text[currentTTS] ? text[text.length - 1] : `${text[currentTTS]}`.replace(/\\n/g, "\n")}
       </Bottom>
     </S.Body>
   );
