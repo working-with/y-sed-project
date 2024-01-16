@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil";
 
 import useCloseBtn from "../../hooks/useCloseBtn";
 import { userInfoAtom } from "../../recoil/atoms/user.atom";
-import getName from "../../utils/getName";
 import axiosRequest from "../../api";
 import { ResData } from "../../@types";
 
@@ -28,14 +27,21 @@ function Start() {
   };
 
   const userInfo = useRecoilValue(userInfoAtom);
-  const name = getName(userInfo.lastName);
 
-  const kidName = name.includes("이") ? `${name.slice(0, name.length - 1)}아` : `${name}야`;
+  const kidName = (userName: string) => {
+    const charCode = userName.charCodeAt(userName.length - 1);
+
+    //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
+    const consonantCode = (charCode - 44032) % 28;
+
+    if (consonantCode === 0) return `${userName}야`;
+    return `${userName}아`;
+  };
 
   const [currentTTS, setCurrentTTS] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const text = [`안녕 ${kidName}~!`];
+  const text = [`안녕 ${kidName(userInfo.lastName)}~!`];
 
   useEffect(() => {
     const currentAudio = audioRef.current;
