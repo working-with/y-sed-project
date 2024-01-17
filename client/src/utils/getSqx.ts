@@ -18,7 +18,7 @@ const getSqx = ({ name, exId, oxId }: SqxProps): SqxData => {
     {
       0: `${name}도 괜찮을 것 같니?`,
       1: `${name}도 걱정이 될 것 같니?`,
-      2: `${name}도 기분이 좋을 것 같니?`,
+      2: `${name}도 행복할 것 같니?`,
     },
 
     // 1
