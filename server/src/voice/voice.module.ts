@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ClovaService } from '../clova/clova.service';
+import { ClovaService } from './clova/clova.service';
 import { VoiceController } from './voice.controller';
 import { VoiceService } from './voice.service';
 import { LogService } from 'src/util/logger';

@@ -7,7 +7,7 @@ export function validateEndingConsonant(name: string): string {
 export function convertScript(name: string, script: string): string {
   const convertName = validateEndingConsonant(name);
   const result = script
-    .replaceAll('[아동이름]이', convertName)
-    .replaceAll('\n', '');
+    .replaceAll('n', '')
+    .replaceAll('[아동이름]이', convertName);
   return result;
 }
