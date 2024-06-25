@@ -1,11 +1,10 @@
 import {
   HttpException,
-  HttpStatus,
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
 import { LogService } from 'src/util/logger';
-import { ClovaService } from 'src/clova/clova.service';
+import { ClovaService } from 'src/voice/clova/clova.service';
 import { convertScript } from 'src/util/converter';
 import { VoiceRequestBody } from 'src/voice/dto/voice.dto';
 import { FirebaseService } from 'src/firebase/firebase.service';
@@ -28,7 +27,7 @@ export class VoiceService {
       const text = convertScript(name, script);
 
       this.logService.verbose(
-        `Success to get voice`,
+        `Success to get voice: ${text}`,
         'voiceService.getVoiceScript()',
       );
       const response = await this.clovaService.getClovaTTS(voiceType, text);
